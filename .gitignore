@@ -1,3 +1,5 @@
-build/
+build
 
 assetes/files
+
+.vscode
