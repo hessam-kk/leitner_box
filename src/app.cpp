@@ -107,16 +107,16 @@ void app()
     while (window.isOpen())
     {
         window.draw(background_sprite);
+        // Top Left Status
         cur_day_text.setString("Today: " + to_string(cur_day + 1));
+        // Find First Word
         if (!arr[cur_day].empty())
         {
-            // Find First Word
             word = arr.at(cur_day).front();
             word_text.setString(word.get_word());
             meaning_text.setString(word.get_meaning());
-            // end find first word
         }
-        else
+        else // Day Has No Word
         {
             word_text.setString("NoWordForToday");
             meaning_text.setString("");
@@ -133,6 +133,7 @@ void app()
             //  Mouse Moved
             if (event.type == sf::Event::MouseMoved)
             {
+                // ADD Icon
                 if (add_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
                 {
                     add_sprite.setTexture(add_texture_hovered);
@@ -141,6 +142,7 @@ void app()
                 {
                     add_sprite.setTexture(add_texture);
                 }
+                // OK Icon
                 if (ok_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
                 {
                     ok_sprite.setTexture(ok_texture_hovered);
@@ -149,6 +151,7 @@ void app()
                 {
                     ok_sprite.setTexture(ok_texture);
                 }
+                // NO Icon
                 if (no_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
                 {
                     no_sprite.setTexture(no_texture_hovered);
@@ -157,6 +160,7 @@ void app()
                 {
                     no_sprite.setTexture(no_texture);
                 }
+                // Next Word Icon
                 if (next_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
                 {
                     next_sprite.setTexture(next_texture_hovered);
@@ -165,6 +169,7 @@ void app()
                 {
                     next_sprite.setTexture(next_texture);
                 }
+                // Next Day Icon
                 if (next_day_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
                 {
                     next_day_sprite.setTexture(next_day_texture_hovered);
@@ -173,7 +178,7 @@ void app()
                 {
                     next_day_sprite.setTexture(next_day_texture);
                 }
-            }
+            } // End Hover
             // Mouse CLICK
             if (event.type == sf::Event::MouseButtonPressed)
             {
@@ -188,7 +193,6 @@ void app()
                 {
                     if (static_cast<string>(word_text.getString()) != "NoWordForToday")
                     {
-
                         prev_click = "ok";
                         clicked = true;
                     }
@@ -210,18 +214,21 @@ void app()
                 {
                     if (static_cast<string>(word_text.getString()) != "NoWordForToday")
                     {
+                        // Clicked on OK and want to go to next word
                         if (prev_click == "ok")
                         {
                             arr[cur_day + 1].push_back(word);
                             arr.at(cur_day).pop_front();
                             prev_click = "";
                         }
+                        // Clicked on NO and want to go to next word
                         else if (prev_click == "no")
                         {
                             arr.at(0).push_back(word);
                             arr.at(cur_day).pop_front();
                             prev_click = "";
                         }
+                        // Nothing clicked and want to skip the word
                         else
                         {
                             arr.at(cur_day).push_back(word);
@@ -231,7 +238,7 @@ void app()
                     }
                     clicked = false;
                     cout << "next Click!" << endl;
-                }
+                } // End Click on Next Button
                 // Click on Next-day Button
                 if (next_day_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
@@ -247,11 +254,10 @@ void app()
                     }
                     clicked = false;
                     cout << "next day Click!" << endl;
-                }
+                } // End Click on Next-day Button
             }
         }
 
-        // TODO Fix Seg Fault on drawing Meaning Text
         // Prepairing Text
         sf::Font font;
         sf::Color color;
@@ -282,5 +288,4 @@ void app()
         window.display();
     }
     write_file(arr);
-    cout << string(word_text.getString()) << endl;
 }
