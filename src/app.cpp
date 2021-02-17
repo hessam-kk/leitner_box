@@ -217,9 +217,17 @@ void app()
                         // Clicked on OK and want to go to next word
                         if (prev_click == "ok")
                         {
-                            arr[cur_day + 1].push_back(word);
-                            arr.at(cur_day).pop_front();
-                            prev_click = "";
+                            if (cur_day == 6)
+                            {
+                                arr[cur_day].pop_front();
+                                prev_click = "";
+                            }
+                            else
+                            {
+                                arr[cur_day + 1].push_back(word);
+                                arr.at(cur_day).pop_front();
+                                prev_click = "";
+                            }
                         }
                         // Clicked on NO and want to go to next word
                         else if (prev_click == "no")
