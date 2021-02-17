@@ -4,8 +4,11 @@
 	 viewBox="0 0 1600 960" style="enable-background:new 0 0 1600 960;" xml:space="preserve">
 <style type="text/css">
 	.st0{fill:#EFEEEE;}
-	.st1{opacity:0.1;fill:#179BE5;}
+	.st1{opacity:0.1;fill:#179BE5;enable-background:new    ;}
 	.st2{fill:#179BE5;}
+	.st3{enable-background:new    ;}
+	.st4{font-family:'PlayfairDisplay-SemiBoldItalic';}
+	.st5{font-size:72px;}
 </style>
 <rect class="st0" width="1600" height="960"/>
 <path class="st1" d="M0,813.1h53.3c53.3,0,160,0,266.7,16s213.3,48,320,64s213.3,16,320,0s213.3-48,320-69.3
@@ -18,4 +21,18 @@
 	c-133.3,0-400,0-666.7,0S266.7,0,133.3,0H0V118.3z"/>
 <path class="st1" d="M0,141.9l133.3-14.8c133.3-14.8,400-44.4,666.7-29.6s533.3,73.9,666.7,103.5l133.3,29.6v-207h-133.3
 	c-133.3,0-400,0-666.7,0s-533.3,0-666.7,0H0V141.9z"/>
+<g class="st3">
+	<image style="overflow:visible;" width="573" height="572" xlink:href="E0F276F8.png"  transform="matrix(1 0 0 1 134 194)">
+	</image>
+</g>
+<path class="st0" d="M630.4,730H210.7c-22.2,0-40.1-18-40.1-40.1V270.1c0-22.2,18-40.1,40.1-40.1h419.7c22.2,0,40.1,18,40.1,40.1
+	v419.7C670.5,712,652.5,730,630.4,730z"/>
+<g>
+	<image style="overflow:visible;" width="572" height="572" xlink:href="E0F276F9.png"  transform="matrix(1 0 0 1 834 194)">
+	</image>
+</g>
+<path class="st0" d="M1329.9,730H910.1c-22.2,0-40.1-18-40.1-40.1V270.1c0-22.2,18-40.1,40.1-40.1h419.7c22.2,0,40.1,18,40.1,40.1
+	v419.7C1370,712,1352,730,1329.9,730z"/>
+<text transform="matrix(1 0 0 1 304.8218 314.8765)" class="st2 st4 st5">Word</text>
+<text transform="matrix(1 0 0 1 932.0806 314.8765)" class="st2 st4 st5">Meaning</text>
 </svg>

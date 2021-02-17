@@ -3,3 +3,5 @@ build
 assets/files
 
 .vscode
+
+db.dat

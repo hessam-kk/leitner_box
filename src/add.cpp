@@ -47,7 +47,8 @@ void add(deque<Word> & deq, const string &cur_mode, const string &cur_col)
                 if (event.text.unicode <= 128    // Be an ascii char
                     && event.text.unicode != 8   // Backspace
                     && event.text.unicode != 13  // Enter
-                    && event.text.unicode != 59) // semicolon :: used in file handling
+                    && event.text.unicode != 59  // semicolon :: used in file handling
+                    && input.length() < 100)      // To be fittable in showing boxes
                 {
                     input += event.text.unicode;
                     text.setString(input);

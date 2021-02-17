@@ -13,8 +13,8 @@
 
 #define window_x 1600
 #define window_y 960
-#define add_icon_x 1475
-#define add_icon_y 835
+#define add_icon_x 1450
+#define add_icon_y 820
 
 using namespace std;
 
@@ -50,6 +50,7 @@ void app()
     //End Of Adding ADD-Icon
 
     array<deque<Word>, 7> arr;
+    read_file(arr);
     
     // Main Loop
     while (window.isOpen())
@@ -92,6 +93,5 @@ void app()
         window.draw(add_sprite);
         window.display();
     }
-    // cout << arr[0][0].get_word() << " :t " << arr[0][0].get_meaning() << endl;
     write_file(arr);
 }
