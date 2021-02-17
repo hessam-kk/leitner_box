@@ -23,7 +23,6 @@ void read_file(std::array<std::deque<Word>, 7> &arr)
         in >> day;
         inword.set_word(word);
         inword.set_meaning(meaning);
-        inword.set_day(day);
         arr[day].push_back(inword);
         in.ignore(); // ignore \n
     }
@@ -42,10 +41,9 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
         {
             out << arr[i].front().get_word() << ':'       // write word
                 << arr[i].front().get_meaning() << ';'    // write meaning
-                << arr[i].front().get_day() << std::endl; // write day
+                << i << std::endl;                        // write day
             arr[i].pop_front();                           // delete element
         }
-
         else
         {
             i++;

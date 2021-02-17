@@ -59,7 +59,6 @@ void add(deque<Word> & deq, const string &cur_mode, const string &cur_col)
                 {
                     tmp_word.set_word(input.substr(0, input.find(':')));
                     tmp_word.set_meaning(input.substr(input.find(':')+1));
-                    tmp_word.set_day(0);
                     deq.push_back(tmp_word);
                     cout << "enter!!" << endl;
                     box.close();

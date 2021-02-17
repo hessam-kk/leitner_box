@@ -6,6 +6,8 @@
 #include <iostream>
 #include <deque>
 #include <array>
+#include <stdexcept>
+#include <unistd.h>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -55,7 +57,7 @@ void app()
     sf::Texture ok_texture_hovered;
     if (!ok_texture_hovered.loadFromFile("../assets/icons/ok-hover.png"))
         cerr << "Error On Loading ok-hover" << endl;
-    ok_sprite.setPosition(sf::Vector2f(690, 310));
+    ok_sprite.setPosition(sf::Vector2f(690, 213));
     //End Of Adding ok-Icon
     // Add no-Icon
     sf::Texture no_texture;
@@ -67,31 +69,55 @@ void app()
     sf::Texture no_texture_hovered;
     if (!no_texture_hovered.loadFromFile("../assets/icons/no-hover.png"))
         cerr << "Error On Loading no-hover" << endl;
-    no_sprite.setPosition(sf::Vector2f(690, 310 + 142));
-    //End Of Adding no-Icon
+    no_sprite.setPosition(sf::Vector2f(690, 213 + 142));
+    // Add next-Icon
+    sf::Texture next_texture;
+    if (!next_texture.loadFromFile("../assets/icons/next-" + Theme_mode[curr_mod] + Theme_color[curr_color] + ".png"))
+        cerr << "Error On Loading next-Icon" << endl;
+    sf::Sprite next_sprite;
+    next_sprite.setTexture(next_texture);
+    // Add next-icon : Hovered
+    sf::Texture next_texture_hovered;
+    if (!next_texture_hovered.loadFromFile("../assets/icons/next-hover-" + Theme_mode[curr_mod] + Theme_color[curr_color] + ".png"))
+        cerr << "Error On Loading next-hover" << endl;
+    next_sprite.setPosition(sf::Vector2f(690, 213 + 100 + 180));
+    //End Of Adding next-Icon
+    // Add next-Icon
+    sf::Texture next_day_texture;
+    if (!next_day_texture.loadFromFile("../assets/icons/day-" + Theme_mode[curr_mod] + Theme_color[curr_color] + ".png"))
+        cerr << "Error On Loading next_day-Icon" << endl;
+    sf::Sprite next_day_sprite;
+    next_day_sprite.setTexture(next_day_texture);
+    // Add next_day-icon : Hovered
+    sf::Texture next_day_texture_hovered;
+    if (!next_day_texture_hovered.loadFromFile("../assets/icons/day-hover-" + Theme_mode[curr_mod] + Theme_color[curr_color] + ".png"))
+        cerr << "Error On Loading next_day-hover" << endl;
+    next_day_sprite.setPosition(sf::Vector2f(690, 213 + 142 + 100 + 180));
+    //End Of Adding next_day-Icon
 
     array<deque<Word>, 7> arr;
     read_file(arr);
-
     Word word;
-    sf::Text word_text, meaning_text;
-    // word = arr[0][0];
+
+    sf::Text word_text, meaning_text, cur_day_text;
     unsigned short int cur_day = 0;
+    bool clicked = false;
     // Main Loop
     while (window.isOpen())
     {
-        try
+        window.draw(background_sprite);
+        cur_day_text.setString("Today: " + to_string(cur_day+1));
+        if (!arr[cur_day].empty())
         {
             // Find First Word
-            word = arr[cur_day].front();
+            word = arr.at(cur_day).front();
             word_text.setString(word.get_word());
             meaning_text.setString(word.get_meaning());
             // end find first word
         }
-        catch (...)
-        {
-            cur_day++;
-        }
+        else
+            word_text.setString("NoWordForToday");
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -127,47 +153,115 @@ void app()
                 {
                     no_sprite.setTexture(no_texture);
                 }
+                if (next_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    next_sprite.setTexture(next_texture_hovered);
+                }
+                else
+                {
+                    next_sprite.setTexture(next_texture);
+                }
+                if (next_day_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    next_day_sprite.setTexture(next_day_texture_hovered);
+                }
+                else
+                {
+                    next_day_sprite.setTexture(next_day_texture);
+                }
             }
             // Mouse CLICK
             if (event.type == sf::Event::MouseButtonPressed)
             {
+                // Click on ADD Button
                 if (add_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
                     add(arr[0], Theme_mode[curr_mod], Theme_color[curr_color]);
                     cout << "Add Click!" << endl;
                 }
+                // Click on OK Button
                 if (ok_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-
+                    if (static_cast<string>(word_text.getString()) != "NoWordForToday")
+                    {
+                        cout << "here! ok" << endl;
+                        // window.draw(meaning_text);
+                        arr[cur_day + 1].push_back(word);
+                        arr.at(cur_day).pop_front();
+                        sleep(2);
+                        clicked = true;
+                    }
                     cout << "ok Click!" << endl;
                 }
+                // Click on NO Button
                 if (no_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
+                    if (static_cast<string>(word_text.getString()) != "NoWordForToday")
+                    {
+                        cout << "here! no : " << string(meaning_text.getString()) << endl;
+                        // window.draw(meaning_text);
+                        sleep(2);
+                        arr.at(0).push_back(word);
+                        arr.at(cur_day).pop_front();
+                        clicked = true;
+                    }
                     cout << "no Click!" << endl;
+                }
+                // Click on Next Button
+                if (next_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    if (static_cast<string>(word_text.getString()) != "NoWordForToday")
+                    {
+                        arr.at(cur_day).push_back(word);
+                        arr.at(cur_day).pop_front();
+                    }
+                    cout << "next Click!" << endl;
+                }
+                // Click on Next-day Button
+                if (next_day_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    if (cur_day < 6)
+                    {
+                        cur_day++;
+                        cout << "day: " << cur_day << endl;
+                    }
+                    else
+                    {
+                        cur_day = 0;
+                        cout << "day: " << cur_day << endl;
+                    }
+                    cout << "next day Click!" << endl;
                 }
             }
         }
 
-        window.draw(background_sprite);
-
+        // TODO Fix Seg Fault on drawing Meaning Text
         // Prepairing Text
         sf::Font font;
         sf::Color color;
         font.loadFromFile("../assets/fonts/Poppins-Bold.ttf");
         word_text.setFont(font);
         meaning_text.setFont(font);
+        cur_day_text.setFont(font);
         word_text.setFillColor(sf::Color::Black);
         meaning_text.setFillColor(sf::Color::Black);
+        cur_day_text.setFillColor(sf::Color::Black);
         word_text.setCharacterSize(40);
         meaning_text.setCharacterSize(40);
+        cur_day_text.setCharacterSize(40);
         word_text.setPosition(sf::Vector2f(260, 450));
         meaning_text.setPosition(sf::Vector2f(960, 450));
+        cur_day_text.setPosition(sf::Vector2f(50, 25));
         window.draw(ok_sprite);
         window.draw(no_sprite);
         window.draw(word_text);
-        window.draw(meaning_text);
         window.draw(add_sprite);
+        window.draw(next_sprite);
+        window.draw(next_day_sprite);
+        window.draw(cur_day_text);
+        // window.draw(meaning_text);
         window.display();
     }
     write_file(arr);
+    cout << string(word_text.getString()) << endl;
 }
