@@ -63,8 +63,18 @@ void add(const string &cur_mode, const string &cur_col)
                 }
             } // End Of Text Handling
         }
+        // Prepairing Text
+        sf::Font font;
+        sf::Color color;
+        font.loadFromFile("../assets/fonts/Poppins-Regular.ttf");
+        text.setFont(font);
+        text.setFillColor(sf::Color::Black);
+        text.setCharacterSize(22);
+        text.setPosition(sf::Vector2f(80, 160));
         tmp = input.substr(0, input.length() - 1); // Keeping Last input for usage in backsapce
         box.draw(background_sprite);
+        box.draw(text);
+
         box.display();
     }
 }
