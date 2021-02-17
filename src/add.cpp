@@ -21,7 +21,9 @@ void add(const string &cur_mode, const string &cur_col)
     sf::Sprite background_sprite;
     background_sprite.setTexture(background_texture);
     // End Of Adding Background
-
+    string input = "", tmp = "";
+    sf::Text text;
+    text.setString(input);
     // Main Loop
     while (box.isOpen())
     {
@@ -34,7 +36,34 @@ void add(const string &cur_mode, const string &cur_col)
             {
                 box.close();
             }
+            // Hanlding Entering Text
+            if (event.type == sf::Event::TextEntered)
+            {                                    // Handle ASCII characters only Except Enter:13 & Backsapce:8
+                if (event.text.unicode <= 128    // Be an ascii char
+                    && event.text.unicode != 8   // Backspace
+                    && event.text.unicode != 13  // Enter
+                    && event.text.unicode != 59) // semicolon :: used in file handling
+                {
+                    input += event.text.unicode;
+                    text.setString(input);
+                    cout << "got input! : " << input << " -> " << input.length() << endl;
+                }
+                // Handling Enter
+                if (event.text.unicode == 13 && input.length() != 0)
+                {
+                    cout << "enter!!" << endl;
+                    box.close();
+                }
+                // Handling Backsapce
+                if (event.text.unicode == 8)
+                {
+                    text.setString(tmp);
+                    input = tmp;
+                    // cout << "Backspace" << endl;
+                }
+            } // End Of Text Handling
         }
+        tmp = input.substr(0, input.length() - 1); // Keeping Last input for usage in backsapce
         box.draw(background_sprite);
         box.display();
     }
