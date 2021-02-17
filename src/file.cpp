@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 
-void read_file(std::array<std::deque<Word>, 7> & arr)
+void read_file(std::array<std::deque<Word>, 7> &arr)
 {
     Word inword;
     std::string word;
@@ -32,3 +32,25 @@ void read_file(std::array<std::deque<Word>, 7> & arr)
 }
 
 // word : meaning ;2
+void write_file(std::array<std::deque<Word>, 7> &arr)
+{
+    std::ofstream out("../db.dat", std::ios::out);
+    int i = 0;
+    while (i < 7)
+    {
+        if (!arr[i].empty())
+        {
+            out << arr[i].front().get_word() << ':'       // write word
+                << arr[i].front().get_meaning() << ';'    // write meaning
+                << arr[i].front().get_day() << std::endl; // write day
+            arr[i].pop_front();                           // delete element
+        }
+
+        else
+        {
+            i++;
+        }
+    }
+    out.clear();
+    out.close();
+}

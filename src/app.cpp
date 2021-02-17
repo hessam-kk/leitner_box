@@ -1,6 +1,7 @@
 #include "../include/app.hpp"
 #include "../include/add.hpp"
 #include "../include/word.hpp"
+#include "../include/file.hpp"
 
 #include <iostream>
 #include <deque>
@@ -91,5 +92,6 @@ void app()
         window.draw(add_sprite);
         window.display();
     }
-    cout << arr[0][0].get_word() << " :t " << arr[0][0].get_meaning() << endl;
+    // cout << arr[0][0].get_word() << " :t " << arr[0][0].get_meaning() << endl;
+    write_file(arr);
 }
