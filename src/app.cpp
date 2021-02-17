@@ -64,6 +64,22 @@ void app()
                 {
                     add_sprite.setTexture(add_texture_hovered);
                 }
+                else
+                {
+                    add_sprite.setTexture(add_texture);
+                }
+            }
+            // Mouse CLICK
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                if (event.mouseButton.button == sf::Mouse::Left)
+                {
+                    if (add_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                    {
+                        add_sprite.setTexture(add_texture_clicked);
+                        cout << "Add Click!" << endl;
+                    }
+                }
             }
         }
         window.draw(background_sprite);
