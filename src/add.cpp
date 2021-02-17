@@ -49,7 +49,7 @@ void add(const string &cur_mode, const string &cur_col)
                     cout << "got input! : " << input << " -> " << input.length() << endl;
                 }
                 // Handling Enter
-                if (event.text.unicode == 13 && input.length() != 0)
+                if (event.text.unicode == 13 && input.length() != 0 && input.find(':') != string::npos)
                 {
                     cout << "enter!!" << endl;
                     box.close();
