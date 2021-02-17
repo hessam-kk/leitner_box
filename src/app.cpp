@@ -74,13 +74,24 @@ void app()
     read_file(arr);
 
     Word word;
-    word = arr[0][0];
     sf::Text word_text, meaning_text;
-    word_text.setString(word.get_word());
-    meaning_text.setString(word.get_meaning());
+    // word = arr[0][0];
+    unsigned short int cur_day = 0;
     // Main Loop
     while (window.isOpen())
     {
+        try
+        {
+            // Find First Word
+            word = arr[cur_day].front();
+            word_text.setString(word.get_word());
+            meaning_text.setString(word.get_meaning());
+            // end find first word
+        }
+        catch (...)
+        {
+            cur_day++;
+        }
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -116,18 +127,18 @@ void app()
                 {
                     no_sprite.setTexture(no_texture);
                 }
-                
             }
             // Mouse CLICK
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 if (add_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-                    cout << "Add Click!" << endl;
                     add(arr[0], Theme_mode[curr_mod], Theme_color[curr_color]);
+                    cout << "Add Click!" << endl;
                 }
                 if (ok_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
+
                     cout << "ok Click!" << endl;
                 }
                 if (no_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
