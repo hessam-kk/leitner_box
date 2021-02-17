@@ -102,11 +102,12 @@ void app()
     sf::Text word_text, meaning_text, cur_day_text;
     unsigned short int cur_day = 0;
     bool clicked = false;
+    string prev_click = "";
     // Main Loop
     while (window.isOpen())
     {
         window.draw(background_sprite);
-        cur_day_text.setString("Today: " + to_string(cur_day+1));
+        cur_day_text.setString("Today: " + to_string(cur_day + 1));
         if (!arr[cur_day].empty())
         {
             // Find First Word
@@ -116,7 +117,10 @@ void app()
             // end find first word
         }
         else
+        {
             word_text.setString("NoWordForToday");
+            meaning_text.setString("");
+        }
 
         sf::Event event;
         while (window.pollEvent(event))
@@ -184,11 +188,8 @@ void app()
                 {
                     if (static_cast<string>(word_text.getString()) != "NoWordForToday")
                     {
-                        cout << "here! ok" << endl;
-                        // window.draw(meaning_text);
-                        arr[cur_day + 1].push_back(word);
-                        arr.at(cur_day).pop_front();
-                        sleep(2);
+
+                        prev_click = "ok";
                         clicked = true;
                     }
                     cout << "ok Click!" << endl;
@@ -198,11 +199,8 @@ void app()
                 {
                     if (static_cast<string>(word_text.getString()) != "NoWordForToday")
                     {
-                        cout << "here! no : " << string(meaning_text.getString()) << endl;
-                        // window.draw(meaning_text);
-                        sleep(2);
-                        arr.at(0).push_back(word);
-                        arr.at(cur_day).pop_front();
+
+                        prev_click = "no";
                         clicked = true;
                     }
                     cout << "no Click!" << endl;
@@ -212,9 +210,26 @@ void app()
                 {
                     if (static_cast<string>(word_text.getString()) != "NoWordForToday")
                     {
-                        arr.at(cur_day).push_back(word);
-                        arr.at(cur_day).pop_front();
+                        if (prev_click == "ok")
+                        {
+                            arr[cur_day + 1].push_back(word);
+                            arr.at(cur_day).pop_front();
+                            prev_click = "";
+                        }
+                        else if (prev_click == "no")
+                        {
+                            arr.at(0).push_back(word);
+                            arr.at(cur_day).pop_front();
+                            prev_click = "";
+                        }
+                        else
+                        {
+                            arr.at(cur_day).push_back(word);
+                            arr.at(cur_day).pop_front();
+                            prev_click = "";
+                        }
                     }
+                    clicked = false;
                     cout << "next Click!" << endl;
                 }
                 // Click on Next-day Button
@@ -230,6 +245,7 @@ void app()
                         cur_day = 0;
                         cout << "day: " << cur_day << endl;
                     }
+                    clicked = false;
                     cout << "next day Click!" << endl;
                 }
             }
@@ -259,7 +275,10 @@ void app()
         window.draw(next_sprite);
         window.draw(next_day_sprite);
         window.draw(cur_day_text);
-        // window.draw(meaning_text);
+        if (clicked)
+        {
+            window.draw(meaning_text);
+        }
         window.display();
     }
     write_file(arr);
