@@ -79,7 +79,7 @@ void app()
                     {
                         add_sprite.setTexture(add_texture_clicked);
                         cout << "Add Click!" << endl;
-                        add();
+                        add(Theme_mode[curr_mod], Theme_color[curr_color]);
                     }
                 }
             }

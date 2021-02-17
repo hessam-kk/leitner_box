@@ -10,9 +10,17 @@ using std::cout;
 using std::endl;
 using std::string;
 
-void add()
+void add(const string &cur_mode, const string &cur_col)
 {
-    sf::RenderWindow box(sf::VideoMode(1000, 300), "Type Something", sf::Style::None);
+    sf::RenderWindow box(sf::VideoMode(800, 300), "Type Something", sf::Style::None);
+
+    // Add a Background
+    sf::Texture background_texture;
+    if (!background_texture.loadFromFile("../assets/images/addbox-" + cur_col + cur_mode + ".png"))
+        cout << "Error On Loading BackGround Image" << endl;
+    sf::Sprite background_sprite;
+    background_sprite.setTexture(background_texture);
+    // End Of Adding Background
 
     // Main Loop
     while (box.isOpen())
@@ -27,5 +35,7 @@ void add()
                 box.close();
             }
         }
+        box.draw(background_sprite);
+        box.display();
     }
 }
