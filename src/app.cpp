@@ -47,6 +47,9 @@ void app()
         cerr << "Error On Loading ADD-clicl" << endl;
     //End Of Adding ADD-Icon
 
+
+
+
     // Main Loop
     while (window.isOpen())
     {
