@@ -45,6 +45,31 @@ void app()
         cerr << "Error On Loading Add-hover" << endl;
     //End Of Adding ADD-Icon
 
+    // Add ok-Icon
+    sf::Texture ok_texture;
+    if (!ok_texture.loadFromFile("../assets/icons/ok.png"))
+        cerr << "Error On Loading ok-Icon" << endl;
+    sf::Sprite ok_sprite;
+    ok_sprite.setTexture(ok_texture);
+    // Add ok-icon : Hovered
+    sf::Texture ok_texture_hovered;
+    if (!ok_texture_hovered.loadFromFile("../assets/icons/ok-hover.png"))
+        cerr << "Error On Loading ok-hover" << endl;
+    ok_sprite.setPosition(sf::Vector2f(690, 310));
+    //End Of Adding ok-Icon
+    // Add no-Icon
+    sf::Texture no_texture;
+    if (!no_texture.loadFromFile("../assets/icons/no.png"))
+        cerr << "Error On Loading no-Icon" << endl;
+    sf::Sprite no_sprite;
+    no_sprite.setTexture(no_texture);
+    // Add no-icon : Hovered
+    sf::Texture no_texture_hovered;
+    if (!no_texture_hovered.loadFromFile("../assets/icons/no-hover.png"))
+        cerr << "Error On Loading no-hover" << endl;
+    no_sprite.setPosition(sf::Vector2f(690, 310 + 142));
+    //End Of Adding no-Icon
+
     array<deque<Word>, 7> arr;
     read_file(arr);
 
@@ -75,6 +100,23 @@ void app()
                 {
                     add_sprite.setTexture(add_texture);
                 }
+                if (ok_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    ok_sprite.setTexture(ok_texture_hovered);
+                }
+                else
+                {
+                    ok_sprite.setTexture(ok_texture);
+                }
+                if (no_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    no_sprite.setTexture(no_texture_hovered);
+                }
+                else
+                {
+                    no_sprite.setTexture(no_texture);
+                }
+                
             }
             // Mouse CLICK
             if (event.type == sf::Event::MouseButtonPressed)
@@ -83,6 +125,14 @@ void app()
                 {
                     cout << "Add Click!" << endl;
                     add(arr[0], Theme_mode[curr_mod], Theme_color[curr_color]);
+                }
+                if (ok_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "ok Click!" << endl;
+                }
+                if (no_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "no Click!" << endl;
                 }
             }
         }
@@ -101,6 +151,8 @@ void app()
         meaning_text.setCharacterSize(40);
         word_text.setPosition(sf::Vector2f(260, 450));
         meaning_text.setPosition(sf::Vector2f(960, 450));
+        window.draw(ok_sprite);
+        window.draw(no_sprite);
         window.draw(word_text);
         window.draw(meaning_text);
         window.draw(add_sprite);
