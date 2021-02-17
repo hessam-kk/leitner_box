@@ -19,7 +19,7 @@ void app()
 {
     string Theme_mode[2] = {"light", "dark"};
     string Theme_color[4] = {"blue", "red", "green", "yellow"};
-    int curr_mod = 0, curr_color = 0; 
+    int curr_mod = 0, curr_color = 0;
     sf::RenderWindow window(sf::VideoMode(window_x, window_y), "Leitner Box", sf::Style::Close); //size:  (9  in  16)  * 60
     window.requestFocus();
     // Add a Background
@@ -46,8 +46,6 @@ void app()
         cerr << "Error On Loading ADD-clicl" << endl;
     //End Of Adding ADD-Icon
 
-
-
     // Main Loop
     while (window.isOpen())
     {
@@ -58,6 +56,14 @@ void app()
             if (event.type == sf::Event::EventType::Closed)
             {
                 window.close();
+            }
+            //  Mouse Moved
+            if (event.type == sf::Event::MouseMoved)
+            {
+                if (add_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    add_sprite.setTexture(add_texture_hovered);
+                }
             }
         }
         window.draw(background_sprite);
