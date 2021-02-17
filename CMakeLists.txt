@@ -4,6 +4,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(SOURCES
     src/main.cpp
     src/app.cpp
+    src/add.cpp
 )
 include_directories(include/)
 add_executable(app ${SOURCES})

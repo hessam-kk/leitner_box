@@ -1,4 +1,5 @@
 #include "../include/app.hpp"
+#include "../include/add.hpp"
 
 #include <iostream>
 #include <deque>
@@ -78,6 +79,7 @@ void app()
                     {
                         add_sprite.setTexture(add_texture_clicked);
                         cout << "Add Click!" << endl;
+                        add();
                     }
                 }
             }
