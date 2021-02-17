@@ -43,15 +43,16 @@ void app()
     sf::Texture add_texture_hovered;
     if (!add_texture_hovered.loadFromFile("../assets/icons/add-hover.png"))
         cerr << "Error On Loading Add-hover" << endl;
-    // Add add-icon : Click
-    sf::Texture add_texture_clicked;
-    if (!add_texture_clicked.loadFromFile("../assets/icons/add-click.png"))
-        cerr << "Error On Loading ADD-clicl" << endl;
     //End Of Adding ADD-Icon
 
     array<deque<Word>, 7> arr;
     read_file(arr);
 
+    Word word;
+    word = arr[0][0];
+    sf::Text word_text, meaning_text;
+    word_text.setString(word.get_word());
+    meaning_text.setString(word.get_meaning());
     // Main Loop
     while (window.isOpen())
     {
@@ -80,13 +81,28 @@ void app()
             {
                 if (add_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-                    add_sprite.setTexture(add_texture_clicked);
                     cout << "Add Click!" << endl;
                     add(arr[0], Theme_mode[curr_mod], Theme_color[curr_color]);
                 }
             }
         }
+
         window.draw(background_sprite);
+
+        // Prepairing Text
+        sf::Font font;
+        sf::Color color;
+        font.loadFromFile("../assets/fonts/Poppins-Bold.ttf");
+        word_text.setFont(font);
+        meaning_text.setFont(font);
+        word_text.setFillColor(sf::Color::Black);
+        meaning_text.setFillColor(sf::Color::Black);
+        word_text.setCharacterSize(40);
+        meaning_text.setCharacterSize(40);
+        word_text.setPosition(sf::Vector2f(260, 450));
+        meaning_text.setPosition(sf::Vector2f(960, 450));
+        window.draw(word_text);
+        window.draw(meaning_text);
         window.draw(add_sprite);
         window.display();
     }

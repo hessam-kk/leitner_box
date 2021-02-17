@@ -18,7 +18,7 @@ void read_file(std::array<std::deque<Word>, 7> &arr)
         {
             continue;
         }
-        in.ignore(); // ignore :
+        // in.ignore(); // ignore :
         getline(in, meaning, ';');
         in >> day;
         inword.set_word(word);
