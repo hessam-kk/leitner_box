@@ -1,6 +1,8 @@
 #include "../include/add.hpp"
+#include "../include/word.hpp"
 #include <iostream>
 #include <string>
+#include <deque>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -9,8 +11,9 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::deque;
 
-void add(const string &cur_mode, const string &cur_col)
+void add(deque<Word> & deq, const string &cur_mode, const string &cur_col)
 {
     sf::RenderWindow box(sf::VideoMode(800, 300), "Type Something", sf::Style::None);
 
@@ -24,6 +27,8 @@ void add(const string &cur_mode, const string &cur_col)
     string input = "", tmp = "";
     sf::Text text;
     text.setString(input);
+    Word tmp_word;
+
     // Main Loop
     while (box.isOpen())
     {
@@ -51,6 +56,10 @@ void add(const string &cur_mode, const string &cur_col)
                 // Handling Enter
                 if (event.text.unicode == 13 && input.length() != 0 && input.find(':') != string::npos)
                 {
+                    tmp_word.set_word(input.substr(0, input.find(':')));
+                    tmp_word.set_meaning(input.substr(input.find(':')+1));
+                    tmp_word.set_day(0);
+                    deq.push_back(tmp_word);
                     cout << "enter!!" << endl;
                     box.close();
                 }

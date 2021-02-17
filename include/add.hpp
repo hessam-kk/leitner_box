@@ -1,4 +1,6 @@
 #pragma once
 #include <string>
+#include <deque>
+#include "word.hpp"
 
-void add(const std::string &, const std::string &);
+void add(std::deque<Word> &,const std::string &, const std::string &);

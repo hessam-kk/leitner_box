@@ -1,9 +1,10 @@
 #include "../include/app.hpp"
 #include "../include/add.hpp"
+#include "../include/word.hpp"
 
 #include <iostream>
 #include <deque>
-
+#include <array>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -47,9 +48,8 @@ void app()
         cerr << "Error On Loading ADD-clicl" << endl;
     //End Of Adding ADD-Icon
 
-
-
-
+    array<deque<Word>, 7> arr;
+    
     // Main Loop
     while (window.isOpen())
     {
@@ -82,7 +82,7 @@ void app()
                     {
                         add_sprite.setTexture(add_texture_clicked);
                         cout << "Add Click!" << endl;
-                        add(Theme_mode[curr_mod], Theme_color[curr_color]);
+                        add(arr[0] ,Theme_mode[curr_mod], Theme_color[curr_color]);
                     }
                 }
             }
@@ -91,4 +91,5 @@ void app()
         window.draw(add_sprite);
         window.display();
     }
+    cout << arr[0][0].get_word() << " :t " << arr[0][0].get_meaning() << endl;
 }
