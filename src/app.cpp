@@ -10,6 +10,8 @@
 
 #define window_x 1600
 #define window_y 960
+#define add_icon_x 1475
+#define add_icon_y 835
 
 using namespace std;
 
@@ -27,6 +29,24 @@ void app()
     sf::Sprite background_sprite;
     background_sprite.setTexture(background_texture);
     // End Of Adding Background
+    // Add ADD-Icon
+    sf::Texture add_texture;
+    if (!add_texture.loadFromFile("../assets/icons/add.png"))
+        cerr << "Error On Loading ADD-Icon" << endl;
+    sf::Sprite add_sprite;
+    add_sprite.setTexture(add_texture);
+    add_sprite.setPosition(sf::Vector2f(add_icon_x, add_icon_y));
+    // Add add-icon : Hovered
+    sf::Texture add_texture_hovered;
+    if (!add_texture_hovered.loadFromFile("../assets/icons/add-hover.png"))
+        cerr << "Error On Loading Add-hover" << endl;
+    // Add add-icon : Click
+    sf::Texture add_texture_clicked;
+    if (!add_texture_clicked.loadFromFile("../assets/icons/add-click.png"))
+        cerr << "Error On Loading ADD-clicl" << endl;
+    //End Of Adding ADD-Icon
+
+
 
     // Main Loop
     while (window.isOpen())
@@ -41,6 +61,7 @@ void app()
             }
         }
         window.draw(background_sprite);
+        window.draw(add_sprite);
         window.display();
     }
 }
