@@ -82,7 +82,7 @@ void app()
         cerr << "Error On Loading next-hover" << endl;
     next_sprite.setPosition(sf::Vector2f(690, 213 + 100 + 180));
     //End Of Adding next-Icon
-    // Add next-Icon
+    // Add next-DAY-Icon
     sf::Texture next_day_texture;
     if (!next_day_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/day.png"))
         cerr << "Error On Loading next_day-Icon" << endl;
@@ -362,11 +362,44 @@ void app()
                     cout << "theme: dark" << endl;
                     curr_mod = 1;
                 }
-                if (!background_texture.loadFromFile("../assets/images/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/back.png"))
-                    cout << "Error On Loading BackGround Image" << endl;
-                background_sprite.setTexture(background_texture);
+        // UPDATE THEMES
+        // Background
+        if (!background_texture.loadFromFile("../assets/images/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/back.png"))
+            cout << "Error On Loading BackGround Image" << endl;
+        background_sprite.setTexture(background_texture);
+        // OK BUTTON
+        if (!ok_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + "/ok.png"))
+            cerr << "Error On Loading ok-Icon" << endl;
+        if (!ok_texture_hovered.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + "/ok-hover.png"))
+            cerr << "Error On Loading ok-hover" << endl;
+        ok_sprite.setTexture(ok_texture);
+        // NO BUTTON
+        if (!no_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + "/no.png"))
+            cerr << "Error On Loading no-Icon" << endl;
+        no_sprite.setTexture(no_texture);
+        if (!no_texture_hovered.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + "/no-hover.png"))
+            cerr << "Error On Loading no-hover" << endl;
+        // NEXT BUTTON
+        if (!next_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/next.png"))
+            cerr << "Error On Loading next-Icon" << endl;
+        next_sprite.setTexture(next_texture);
+        if (!next_texture_hovered.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/next-hover.png"))
+            cerr << "Error On Loading next-hover" << endl;
+        // NEXT DAY BUTTON
+        if (!next_day_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/day.png"))
+            cerr << "Error On Loading next_day-Icon" << endl;
+        next_day_sprite.setTexture(next_day_texture);
+        if (!next_day_texture_hovered.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/day-hover.png"))
+            cerr << "Error On Loading next_day-hover" << endl;
+        // ADD ICON
+        if (!add_texture.loadFromFile("../assets/icons/dark/" + Theme_color[curr_color] + "/add.png"))
+            cerr << "Error On Loading ADD-Icon" << endl;
+        if (!add_texture_hovered.loadFromFile("../assets/icons/dark/" + Theme_color[curr_color] + "/add-hover.png"))
+            cerr << "Error On Loading Add-hover" << endl;
+        add_sprite.setTexture(add_texture);
             }
         }
+
         // Prepairing Text
         sf::Font font;
         sf::Color color;
