@@ -24,7 +24,7 @@ void app()
 {
     string Theme_mode[2] = {"light", "dark"};
     string Theme_color[6] = {"blue", "red", "green", "yellow", "purple", "pink"};
-    int curr_mod = 1, curr_color = 0;
+    int curr_mod = 1, curr_color = 3;
     sf::RenderWindow window(sf::VideoMode(window_x, window_y), "Leitner Box", sf::Style::Close); //size:  (9  in  16)  * 60
     window.requestFocus();
     // Add Background
@@ -94,6 +94,64 @@ void app()
         cerr << "Error On Loading next_day-hover" << endl;
     next_day_sprite.setPosition(sf::Vector2f(690, 213 + 142 + 100 + 180));
     //End Of Adding next_day-Icon
+    // theme-Icons
+    sf::Texture blue_texture;
+    if (!blue_texture.loadFromFile("../assets/icons/blue.png"))
+        cerr << "Error On Loading blue-Icon" << endl;
+    sf::Sprite blue_sprite;
+    blue_sprite.setTexture(blue_texture);
+    blue_sprite.setPosition(sf::Vector2f(1150, 25));
+    // -------------------------------------
+    sf::Texture red_texture;
+    if (!red_texture.loadFromFile("../assets/icons/red.png"))
+        cerr << "Error On Loading red-Icon" << endl;
+    sf::Sprite red_sprite;
+    red_sprite.setTexture(red_texture);
+    red_sprite.setPosition(sf::Vector2f(1150 + 73, 25));
+    // -------------------------------------
+    sf::Texture green_texture;
+    if (!green_texture.loadFromFile("../assets/icons/green.png"))
+        cerr << "Error On Loading green-Icon" << endl;
+    sf::Sprite green_sprite;
+    green_sprite.setTexture(green_texture);
+    green_sprite.setPosition(sf::Vector2f(1150 + 73 * 2, 25));
+    // -------------------------------------
+    sf::Texture purple_texture;
+    if (!purple_texture.loadFromFile("../assets/icons/purple.png"))
+        cerr << "Error On Loading purple-Icon" << endl;
+    sf::Sprite purple_sprite;
+    purple_sprite.setTexture(purple_texture);
+    purple_sprite.setPosition(sf::Vector2f(1150 + 73 * 3, 25));
+    // -------------------------------------
+    sf::Texture yellow_texture;
+    if (!yellow_texture.loadFromFile("../assets/icons/yellow.png"))
+        cerr << "Error On Loading yellow-Icon" << endl;
+    sf::Sprite yellow_sprite;
+    yellow_sprite.setTexture(yellow_texture);
+    yellow_sprite.setPosition(sf::Vector2f(1150 + 73 * 4, 25));
+    // -------------------------------------
+    sf::Texture pink_texture;
+    if (!pink_texture.loadFromFile("../assets/icons/pink.png"))
+        cerr << "Error On Loading pink-Icon" << endl;
+    sf::Sprite pink_sprite;
+    pink_sprite.setTexture(pink_texture);
+    pink_sprite.setPosition(sf::Vector2f(1150 + 73 * 5, 25));
+    // -------------------------------------
+    sf::Texture dark_texture;
+    if (!dark_texture.loadFromFile("../assets/icons/dark.png"))
+        cerr << "Error On Loading dark-Icon" << endl;
+    sf::Sprite dark_sprite;
+    dark_sprite.setTexture(dark_texture);
+    dark_sprite.setPosition(sf::Vector2f(1150 + 73 * 4, 100));
+    // -------------------------------------
+    sf::Texture light_texture;
+    if (!light_texture.loadFromFile("../assets/icons/light.png"))
+        cerr << "Error On Loading light-Icon" << endl;
+    sf::Sprite light_sprite;
+    light_sprite.setTexture(light_texture);
+    light_sprite.setPosition(sf::Vector2f(1150 + 73 * 5, 100));
+    // -------------------------------------
+    // end theme-Icons
 
     array<deque<Word>, 7> arr;
     read_file(arr);
@@ -263,9 +321,52 @@ void app()
                     clicked = false;
                     cout << "next day Click!" << endl;
                 } // End Click on Next-day Button
+                  // string Theme_color[6] = {"blue", "red", "green", "yellow", "purple", "pink"};
+                if (blue_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "theme: blue" << endl;
+                    curr_color = 0;
+                }
+                if (red_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "theme: red" << endl;
+                    curr_color = 1;
+                }
+                if (green_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "theme: green" << endl;
+                    curr_color = 2;
+                }
+                if (yellow_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "theme: yellow" << endl;
+                    curr_color = 3;
+                }
+                if (purple_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "theme: purple" << endl;
+                    curr_color = 4;
+                }
+                if (pink_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "theme: pink" << endl;
+                    curr_color = 5;
+                }
+                if (light_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "theme: light" << endl;
+                    curr_mod = 0;
+                }
+                if (dark_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "theme: dark" << endl;
+                    curr_mod = 1;
+                }
+                if (!background_texture.loadFromFile("../assets/images/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/back.png"))
+                    cout << "Error On Loading BackGround Image" << endl;
+                background_sprite.setTexture(background_texture);
             }
         }
-
         // Prepairing Text
         sf::Font font;
         sf::Color color;
@@ -298,10 +399,18 @@ void app()
         window.draw(next_sprite);
         window.draw(next_day_sprite);
         window.draw(cur_day_text);
+        window.draw(blue_sprite);
+        window.draw(green_sprite);
+        window.draw(red_sprite);
+        window.draw(pink_sprite);
+        window.draw(purple_sprite);
+        window.draw(yellow_sprite);
+        window.draw(dark_sprite);
+        window.draw(light_sprite);
         if (clicked)
-        {
+
             window.draw(meaning_text);
-        }
+
         window.display();
     }
     write_file(arr);
