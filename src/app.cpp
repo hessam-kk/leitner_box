@@ -23,74 +23,74 @@ using namespace std;
 void app()
 {
     string Theme_mode[2] = {"light", "dark"};
-    string Theme_color[4] = {"blue", "red", "green", "yellow"};
-    int curr_mod = 0, curr_color = 0;
+    string Theme_color[6] = {"blue", "red", "green", "yellow", "purple", "pink"};
+    int curr_mod = 1, curr_color = 0;
     sf::RenderWindow window(sf::VideoMode(window_x, window_y), "Leitner Box", sf::Style::Close); //size:  (9  in  16)  * 60
     window.requestFocus();
-    // Add a Background
+    // Add Background
     sf::Texture background_texture;
-    if (!background_texture.loadFromFile("../assets/images/background-" + Theme_color[curr_color] + Theme_mode[curr_mod] + ".png"))
+    if (!background_texture.loadFromFile("../assets/images/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/back.png"))
         cout << "Error On Loading BackGround Image" << endl;
     sf::Sprite background_sprite;
     background_sprite.setTexture(background_texture);
     // End Of Adding Background
     // Add ADD-Icon
     sf::Texture add_texture;
-    if (!add_texture.loadFromFile("../assets/icons/add.png"))
+    if (!add_texture.loadFromFile("../assets/icons/dark/" + Theme_color[curr_color] + "/add.png"))
         cerr << "Error On Loading ADD-Icon" << endl;
     sf::Sprite add_sprite;
     add_sprite.setTexture(add_texture);
     add_sprite.setPosition(sf::Vector2f(add_icon_x, add_icon_y));
     // Add add-icon : Hovered
     sf::Texture add_texture_hovered;
-    if (!add_texture_hovered.loadFromFile("../assets/icons/add-hover.png"))
+    if (!add_texture_hovered.loadFromFile("../assets/icons/dark/" + Theme_color[curr_color] + "/add-hover.png"))
         cerr << "Error On Loading Add-hover" << endl;
     //End Of Adding ADD-Icon
 
     // Add ok-Icon
     sf::Texture ok_texture;
-    if (!ok_texture.loadFromFile("../assets/icons/ok.png"))
+    if (!ok_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + "/ok.png"))
         cerr << "Error On Loading ok-Icon" << endl;
     sf::Sprite ok_sprite;
     ok_sprite.setTexture(ok_texture);
     // Add ok-icon : Hovered
     sf::Texture ok_texture_hovered;
-    if (!ok_texture_hovered.loadFromFile("../assets/icons/ok-hover.png"))
+    if (!ok_texture_hovered.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + "/ok-hover.png"))
         cerr << "Error On Loading ok-hover" << endl;
     ok_sprite.setPosition(sf::Vector2f(690, 213));
     //End Of Adding ok-Icon
     // Add no-Icon
     sf::Texture no_texture;
-    if (!no_texture.loadFromFile("../assets/icons/no.png"))
+    if (!no_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + "/no.png"))
         cerr << "Error On Loading no-Icon" << endl;
     sf::Sprite no_sprite;
     no_sprite.setTexture(no_texture);
     // Add no-icon : Hovered
     sf::Texture no_texture_hovered;
-    if (!no_texture_hovered.loadFromFile("../assets/icons/no-hover.png"))
+    if (!no_texture_hovered.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + "/no-hover.png"))
         cerr << "Error On Loading no-hover" << endl;
     no_sprite.setPosition(sf::Vector2f(690, 213 + 142));
     // Add next-Icon
     sf::Texture next_texture;
-    if (!next_texture.loadFromFile("../assets/icons/next-" + Theme_mode[curr_mod] + Theme_color[curr_color] + ".png"))
+    if (!next_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/next.png"))
         cerr << "Error On Loading next-Icon" << endl;
     sf::Sprite next_sprite;
     next_sprite.setTexture(next_texture);
     // Add next-icon : Hovered
     sf::Texture next_texture_hovered;
-    if (!next_texture_hovered.loadFromFile("../assets/icons/next-hover-" + Theme_mode[curr_mod] + Theme_color[curr_color] + ".png"))
+    if (!next_texture_hovered.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/next-hover.png"))
         cerr << "Error On Loading next-hover" << endl;
     next_sprite.setPosition(sf::Vector2f(690, 213 + 100 + 180));
     //End Of Adding next-Icon
     // Add next-Icon
     sf::Texture next_day_texture;
-    if (!next_day_texture.loadFromFile("../assets/icons/day-" + Theme_mode[curr_mod] + Theme_color[curr_color] + ".png"))
+    if (!next_day_texture.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/day.png"))
         cerr << "Error On Loading next_day-Icon" << endl;
     sf::Sprite next_day_sprite;
     next_day_sprite.setTexture(next_day_texture);
     // Add next_day-icon : Hovered
     sf::Texture next_day_texture_hovered;
-    if (!next_day_texture_hovered.loadFromFile("../assets/icons/day-hover-" + Theme_mode[curr_mod] + Theme_color[curr_color] + ".png"))
+    if (!next_day_texture_hovered.loadFromFile("../assets/icons/" + Theme_mode[curr_mod] + '/' + Theme_color[curr_color] + "/day-hover.png"))
         cerr << "Error On Loading next_day-hover" << endl;
     next_day_sprite.setPosition(sf::Vector2f(690, 213 + 142 + 100 + 180));
     //End Of Adding next_day-Icon
@@ -273,9 +273,18 @@ void app()
         word_text.setFont(font);
         meaning_text.setFont(font);
         cur_day_text.setFont(font);
-        word_text.setFillColor(sf::Color::Black);
-        meaning_text.setFillColor(sf::Color::Black);
-        cur_day_text.setFillColor(sf::Color::Black);
+        if (curr_mod == 0)
+        {
+            word_text.setFillColor(sf::Color::Black);
+            meaning_text.setFillColor(sf::Color::Black);
+            cur_day_text.setFillColor(sf::Color::Black);
+        }
+        else
+        {
+            word_text.setFillColor(sf::Color::White);
+            meaning_text.setFillColor(sf::Color::White);
+            cur_day_text.setFillColor(sf::Color::White);
+        }
         word_text.setCharacterSize(40);
         meaning_text.setCharacterSize(40);
         cur_day_text.setCharacterSize(40);

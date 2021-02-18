@@ -9,17 +9,17 @@
 #include <SFML/System.hpp>
 
 using std::cout;
+using std::deque;
 using std::endl;
 using std::string;
-using std::deque;
 
-void add(deque<Word> & deq, const string &cur_mode, const string &cur_col)
+void add(deque<Word> &deq, const string &cur_mode, const string &cur_col)
 {
-    sf::RenderWindow box(sf::VideoMode(800, 300), "Type Something", sf::Style::None);
-
+    sf::RenderWindow box(sf::VideoMode(800, 300), "Add A Word", sf::Style::None);
+    cout << cur_mode << " & " << cur_col << endl;
     // Add a Background
     sf::Texture background_texture;
-    if (!background_texture.loadFromFile("../assets/images/addbox-" + cur_col + cur_mode + ".png"))
+    if (!background_texture.loadFromFile("../assets/images/" + cur_mode + '/' + cur_col + "/add.png"))
         cout << "Error On Loading BackGround Image" << endl;
     sf::Sprite background_sprite;
     background_sprite.setTexture(background_texture);
@@ -43,12 +43,12 @@ void add(deque<Word> & deq, const string &cur_mode, const string &cur_col)
             }
             // Hanlding Entering Text
             if (event.type == sf::Event::TextEntered)
-            {                                    // Handle ASCII characters only Except Enter:13 & Backsapce:8
-                if (event.text.unicode <= 128    // Be an ascii char
-                    && event.text.unicode != 8   // Backspace
-                    && event.text.unicode != 13  // Enter
-                    && event.text.unicode != 59  // semicolon :: used in file handling
-                    && input.length() < 100)      // To be fittable in showing boxes
+            {                                   // Handle ASCII characters only Except Enter:13 & Backsapce:8
+                if (event.text.unicode <= 128   // Be an ascii char
+                    && event.text.unicode != 8  // Backspace
+                    && event.text.unicode != 13 // Enter
+                    && event.text.unicode != 59 // semicolon :: used in file handling
+                    && input.length() < 100)    // To be fittable in showing boxes
                 {
                     input += event.text.unicode;
                     text.setString(input);
@@ -58,7 +58,7 @@ void add(deque<Word> & deq, const string &cur_mode, const string &cur_col)
                 if (event.text.unicode == 13 && input.length() != 0 && input.find(':') != string::npos)
                 {
                     tmp_word.set_word(input.substr(0, input.find(':')));
-                    tmp_word.set_meaning(input.substr(input.find(':')+1));
+                    tmp_word.set_meaning(input.substr(input.find(':') + 1));
                     deq.push_back(tmp_word);
                     cout << "enter!!" << endl;
                     box.close();
