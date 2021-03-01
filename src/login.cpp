@@ -46,7 +46,16 @@ bool login()
             // Choose UserName Or Password
             if (event.type == sf::Event::MouseButtonPressed)
             {
+                if (rec1.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cur_box = 0;
+                }
+                else if (rec2.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cur_box = 1;
+                }
             }
+            // End Choose UserName Or Password
             // Hanlding Entering Text
             if (event.type == sf::Event::TextEntered)
             {                                   // Handle ASCII characters only Except Enter:13 & Backsapce:8
