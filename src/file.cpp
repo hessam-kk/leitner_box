@@ -118,6 +118,7 @@ User read_user(std::string main_username)
         {
             cout << "found" << endl;
             tmp_user.username = username;
+            in.ignore();
             getline(in, tmp_user.password, ',');
             in >> tmp_user.total_tests               //
                 >> tmp_user.avg_scores               //

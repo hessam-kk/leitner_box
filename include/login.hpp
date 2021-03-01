@@ -1,3 +1,3 @@
 #pragma once
-
-bool login();
+#include "user.hpp"
+bool login(User &);

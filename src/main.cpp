@@ -10,16 +10,21 @@ using namespace std;
 
 int main()
 {
-
-    // login();
-    // if (choose() == 0) // learn
-    // {
-    //     app();
-    // }
-    // else // Exam 
-    // {
-    //     test_summery();
-    // }
-    // app();
+    User Primary;
+    // Primary = read_user("hes");?
+    // cout << Primary.get_password() << endl;
+    if (login(Primary))
+    {
+        cout << Primary.get_password() << endl;
+        if (choose() == 0) // learn
+        {
+            app();
+        }
+        else // Exam
+        {
+            test_summery();
+        }
+        // app();
+    }
     return 0;
 }

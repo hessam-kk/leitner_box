@@ -14,7 +14,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-bool login()
+bool login(User &primary)
 {
     sf::RenderWindow window(sf::VideoMode(1600, 960), "login", sf::Style::Close);
     window.requestFocus();
@@ -59,7 +59,7 @@ bool login()
     int cur_box = 0;
     User my_user;
     SHA256 sha256; // To Store Password Crypted
-    
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -96,8 +96,11 @@ bool login()
                         if (password == my_user.get_password())
                         {
                             cout << "Login Successful!!" << endl;
+                            primary = my_user;
+                            return 1;
                         }
-                        else {
+                        else
+                        {
                             cout << "Wrong Password!!" << endl;
                         }
                     }
@@ -166,8 +169,8 @@ bool login()
                 // Handling Backsapce
                 if (event.text.unicode == 8)
                 {
-                    (cur_box ? pass : user).setString(cur_box ? password : username);
                     (cur_box ? password : username) = cur_box ? tmp_pass : tmp_user;
+                    (cur_box ? pass : user).setString(cur_box ? password : username);
                     // cout << "Backspace" << endl;
                 }
             }
