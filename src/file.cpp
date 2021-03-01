@@ -58,7 +58,7 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
     out.close();
 }
 
-void write_user(User const & u)
+void write_user(User const &u)
 {
     std::ofstream out("../userslist.dat", std::ios::app);
     if (!out)
@@ -66,9 +66,9 @@ void write_user(User const & u)
         cout << "error open out file" << endl;
     }
     out << '[' + u.get_username() + ':' + u.get_password() + ',';
-    out << u.get_total_test() + ',' + u.get_avg_score() + ',' ;
-    out << u.get_last_test().total_questions + ',' +  u.get_last_test().avg_score + ',';
-    out <<  u.get_last_test().corrects + ',' +  u.get_last_test().wrongs + ']';
+    out << u.get_total_test() + ' ' + u.get_avg_score() + ' ';
+    out << u.get_last_test().total_questions + ' ' + u.get_last_test().avg_score + ' ';
+    out << u.get_last_test().corrects + ' ' + u.get_last_test().wrongs + " ]" + '\n';
     out.flush();
     out.clear();
     out.close();
@@ -77,24 +77,35 @@ void write_user(User const & u)
 
 User read_user(std::string main_username)
 {
-    std::ifstream in("../userslist.dat", std::ios::binary);
+    std::ifstream in("../userslist.dat");
     if (!in)
     {
         cout << "error open in file" << endl;
     }
     in.seekg(0, std::ios::beg);
+
     while (!in.eof())
     {
-        cout << "while" << endl;
         User tmp_user;
-        in.read(reinterpret_cast<char *>(&tmp_user), sizeof(User));
-
-        cout << "while2" << endl;
-        if (tmp_user.get_password() == main_username)
+        string username;
+        in.ignore(); // Ignore [
+        getline(in, username, ':');
+        
+        if (username == main_username)
         {
             cout << "found" << endl;
+            tmp_user.username = username;
+            getline(in, tmp_user.password, ',');
+            in >> tmp_user.total_tests               //
+                >> tmp_user.avg_scores               //
+                >> tmp_user.last_one.total_questions //
+                >> tmp_user.last_one.avg_score       //
+                >> tmp_user.last_one.corrects        //
+                >> tmp_user.last_one.wrongs;
+            in.ignore(2); // ignore -]
             return tmp_user;
         }
+        in.seekg('[');
     }
     cout << "not found " << endl;
     return User("404");

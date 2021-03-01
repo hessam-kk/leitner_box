@@ -86,6 +86,7 @@ bool login()
                 {
                     cout << "Enter User:" << username << " Pass:" << password << endl;
                     my_user = read_user(username);
+                    cout << "HI  " << my_user.get_username() << endl;
                     if (my_user.get_username() == "404")
                     {
                         cout << "no user available" << endl;
@@ -106,9 +107,6 @@ bool login()
                 {
                     // Search for Username account
                     my_user = read_user(username);
-                    // cout << "User " << my_user.get_username() << endl;
-                    // cout << "Password: " << password << endl;
-                    // cout << "Pass: " << my_user.get_password() << endl;
                     if (my_user.get_username() == "404")
                     {
                         my_user = User(username, password);
