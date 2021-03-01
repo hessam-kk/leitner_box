@@ -61,18 +61,41 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
 void write_user(User const &u)
 {
     std::ofstream out("../userslist.dat", std::ios::app);
+    std::ifstream in("../userslist.dat", std::ios::in);
     if (!out)
     {
         cout << "error open out file" << endl;
     }
-    out << '[' + u.get_username() + ':' + u.get_password() + ',';
-    out << u.get_total_test() + ' ' + u.get_avg_score() + ' ';
-    out << u.get_last_test().total_questions + ' ' + u.get_last_test().avg_score + ' ';
-    out << u.get_last_test().corrects + ' ' + u.get_last_test().wrongs + " ]" + '\n';
+
+    while (!in.eof())
+    {
+        // in.ignore();
+        string username = "";
+        getline(in, username, ' ');
+        if (username == u.get_username())
+        {
+            out << u.get_username() << ' ' << u.get_password() + ',';
+            out << u.get_total_test() << ' ' << u.get_avg_score() << ' ';
+            out << u.get_last_test().total_questions << ' ' << u.get_last_test().avg_score << ' ';
+            out << u.get_last_test().corrects << ' ' << u.get_last_test().wrongs << '\n';
+            out.flush();
+            out.clear();
+            out.close();
+            cout << "End over write user ";
+            return;
+        }
+    }
+    out.seekp(std::ios::end);
+    cout << "start write user " << endl;
+    out << u.get_username() << ' ' << u.get_password() + ',';
+    out << u.get_total_test() << ' ' << u.get_avg_score() << ' ';
+    out << u.get_last_test().total_questions << ' ' << u.get_last_test().avg_score << ' ';
+    out << u.get_last_test().corrects << ' ' << u.get_last_test().wrongs << '\n';
+
     out.flush();
     out.clear();
     out.close();
-    cout << "End write user ";
+    cout << "End write user " << endl;
 }
 
 User read_user(std::string main_username)
@@ -84,13 +107,13 @@ User read_user(std::string main_username)
     }
     in.seekg(0, std::ios::beg);
 
+    User tmp_user;
+    bool done = false;
     while (!in.eof())
     {
-        User tmp_user;
         string username;
-        in.ignore(); // Ignore [
-        getline(in, username, ':');
-        
+        in >> username;
+
         if (username == main_username)
         {
             cout << "found" << endl;
@@ -102,11 +125,12 @@ User read_user(std::string main_username)
                 >> tmp_user.last_one.avg_score       //
                 >> tmp_user.last_one.corrects        //
                 >> tmp_user.last_one.wrongs;
-            in.ignore(2); // ignore -]
-            return tmp_user;
+            in.ignore(2); // ignore -
+            done = true;
         }
-        in.seekg('[');
     }
+    if (done)
+        return tmp_user;
     cout << "not found " << endl;
     return User("404");
 }
