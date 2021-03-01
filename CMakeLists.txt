@@ -9,6 +9,7 @@ set(SOURCES
     src/file.cpp
     src/login.cpp
     src/user.cpp
+    src/choose.cpp
     hash-library-master/sha256.cpp
 )
 include_directories(include/)
