@@ -25,7 +25,7 @@ void app()
 {
     string Theme_mode[2] = {"light", "dark"};
     string Theme_color[6] = {"blue", "red", "green", "yellow", "purple", "pink"};
-    int curr_mod = 1, curr_color = 3;
+    int curr_mod = 0, curr_color = 1;
     sf::RenderWindow window(sf::VideoMode(window_x, window_y), "Leitner Box", sf::Style::Close); //size:  (9  in  16)  * 60
     window.requestFocus();
     // Add Background
