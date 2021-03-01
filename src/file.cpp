@@ -4,6 +4,10 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+
+using std::cout;
+using std::endl;
+
 void read_file(std::array<std::deque<Word>, 7> &arr)
 {
     Word inword;
@@ -54,28 +58,58 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
     out.close();
 }
 
-User read_user()
+void write_user(User &my_user)
 {
-    User userT;
-    std::ifstream in("../userslist.txt", std::ios::in);
+    User tmp;
+    system("pwd");
+    std::ofstream out("../userslist.dat", std::ios::app | std::ios::binary);
+    std::ifstream in("../userslist.dat", std::ios::ate | std::ios::in | std::ios::binary);
+    if (!in.is_open())
+    {
+        std::cerr << "Error on file opening" << std::endl;
+        return;
+    }
+
+    in.seekg(std::ios::beg);
+    // Search For duplicate
+    while (!in.eof())
+    {
+        in.read(reinterpret_cast<char *>(&tmp), sizeof(tmp));
+        if (tmp.get_username() == my_user.get_username())
+        {
+            in.close();
+            return;
+        }
+    }
+    out.seekp(std::ios::end);
+    out.write(reinterpret_cast<const char *>(&my_user), sizeof(my_user));
+    cout << "Saved!" << endl;
+    out.flush();
+    out.clear();
+    out.close();
+}
+
+User read_user(std::string const &main_username)
+{
+    User tmp;
+    std::ifstream in("../userslist.dat", std::ios::in | std::ios::binary);
+    in.seekg(0, std::ios::beg);
     if (!in)
     {
         std::cout << "error on file!" << std::endl;
     }
-    string name, pass;
     while (!in.eof())
     {
-        getline(in, name, ':'); // Reads User
-        if (name == "")
+        in.read(reinterpret_cast<char *>(&tmp), sizeof(tmp));
+        if (tmp.get_username() == main_username)
         {
-            continue;
+            cout << "Read User:" << tmp.get_username() << ' ' << tmp.get_password() << endl;
+            in.clear();
+            in.close();
+            return tmp;
         }
-        in >> pass;
-        userT.set_username(name);
-        userT.set_password(pass);
-        in.ignore(); // ignore \n
     }
     in.clear();
     in.close();
-    return userT;
+    return User("404");
 }
