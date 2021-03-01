@@ -22,17 +22,27 @@ bool login()
     sf::Sprite background_sprite;
     background_sprite.setTexture(background_texture);
     // End add a Background
+    // Add Enter Icon
+    sf::Texture Enter_texture, Enter_texture_hover;
+    if (!Enter_texture.loadFromFile("../assets/images/NewRed/Enter.png"))
+        cout << "Error On Loading Enter Image" << endl;
+    if (!Enter_texture_hover.loadFromFile("../assets/images/NewRed/Enter-hover.png"))
+        cout << "Error On Loading Enter-hover Image" << endl;
+    sf::Sprite Enter_sprite;
+    Enter_sprite.setTexture(Enter_texture);
+    Enter_sprite.setPosition(650, 600);
+    // End add Enter Icon
     sf::RectangleShape rec1, rec2;
     rec1.setSize(sf::Vector2f(480, 82));
-    rec1.setPosition(sf::Vector2f(560, 330));
+    rec1.setPosition(560, 330);
     rec1.setFillColor(sf::Color::Blue);
     rec2.setSize(sf::Vector2f(480, 82));
-    rec2.setPosition(sf::Vector2f(560, 490));
+    rec2.setPosition(560, 490);
     rec2.setFillColor(sf::Color::Blue);
 
     string input = "", tmp_user = "", tmp_pass = "", username = "", password = "";
     sf::Text user, pass;
-    int cur_box = 1;
+    int cur_box = 0;
 
     SHA256 pass256; // To Store Password Crypted
 
@@ -47,19 +57,32 @@ bool login()
             {
                 window.close();
             }
-            // Choose UserName Or Password
+            // Mouse Click
             if (event.type == sf::Event::MouseButtonPressed)
             {
+                // Choose UserName Or Password
                 if (rec1.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
-                {
                     cur_box = 0;
-                }
                 else if (rec2.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
-                {
                     cur_box = 1;
-                }
+                // End Choose UserName Or Password
+                
             }
             // End Choose UserName Or Password
+            // End Mouse Click
+            if (event.type == sf::Event::MouseMoved)
+            {
+                // Enter Icon
+                if (Enter_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    Enter_sprite.setTexture(Enter_texture_hover);
+                }
+                else
+                {
+                    Enter_sprite.setTexture(Enter_texture);
+                }
+            }
+
             // Hanlding Entering Text
             if (event.type == sf::Event::TextEntered)
             {                                   // Handle ASCII characters only Except Enter:13 & Backsapce:8
@@ -72,18 +95,6 @@ bool login()
                     (cur_box ? password : username) += event.text.unicode;
                     (cur_box ? pass : user).setString(cur_box ? password : username);
                     cout << "got input! : " << (cur_box ? password : username) << " -> " << (cur_box ? password : username).length() << endl;
-                    // if (cur_box == 0) // UserName
-                    // {
-                    //     username += event.text.unicode;
-                    //     text.setString(username);
-                    //     cout << "got input!(username) : " << input << " -> " << input.length() << endl;
-                    // }
-                    // if (cur_box == 1) // Password
-                    // {
-                    //     password += event.text.unicode;
-                    //     text.setString(password);
-                    //     cout << "got input!(password) : " << input << " -> " << input.length() << endl;
-                    // }
                 }
                 // Handling Enter
                 if (event.text.unicode == 13 && input.length() != 0 && input.find(':') != string::npos)
@@ -98,6 +109,7 @@ bool login()
                     // cout << "Backspace" << endl;
                 }
             }
+            // End Handling Entring Text
         }
         // Prepairing Text
         sf::Font font;
@@ -119,6 +131,9 @@ bool login()
         // window.draw(rec2);
         window.draw(user);
         window.draw(pass);
+        window.draw(Enter_sprite);
         window.display();
     }
 }
+
+// TODO show Star for pass
