@@ -1,7 +1,7 @@
-#include "../include/app.hpp"
-#include "../include/add.hpp"
-#include "../include/word.hpp"
-#include "../include/file.hpp"
+#include "app.hpp"
+#include "add.hpp"
+#include "word.hpp"
+#include "file.hpp"
 
 #include <iostream>
 #include <deque>

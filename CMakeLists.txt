@@ -12,7 +12,8 @@ set(SOURCES
     src/choose.cpp
     src/test_summery.cpp
     hash-library-master/sha256.cpp
+    
 )
-include_directories(include/)
+include_directories(include/ json-develop/include/ hash-library-master/)
 add_executable(app ${SOURCES})
 target_link_libraries(app sfml-window sfml-system sfml-graphics)

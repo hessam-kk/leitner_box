@@ -1,6 +1,6 @@
-#include "../include/file.hpp"
-#include "../include/word.hpp"
-#include "../include/user.hpp"
+#include "file.hpp"
+#include "word.hpp"
+#include "user.hpp"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -58,58 +58,45 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
     out.close();
 }
 
-void write_user(User &my_user)
+void write_user(User my_user)
 {
+    cout << "Start write user : " << my_user.get_username()
+         << ' ' << my_user.get_password() << endl;
     User tmp;
-    system("pwd");
+    // std::ifstream in("../userslist.dat", std::ios::ate | std::ios::in | std::ios::binary);
     std::ofstream out("../userslist.dat", std::ios::app | std::ios::binary);
-    std::ifstream in("../userslist.dat", std::ios::ate | std::ios::in | std::ios::binary);
-    if (!in.is_open())
-    {
-        std::cerr << "Error on file opening" << std::endl;
-        return;
-    }
-
-    in.seekg(std::ios::beg);
-    // Search For duplicate
-    while (!in.eof())
-    {
-        in.read(reinterpret_cast<char *>(&tmp), sizeof(tmp));
-        if (tmp.get_username() == my_user.get_username())
-        {
-            in.close();
-            return;
-        }
-    }
     out.seekp(std::ios::end);
-    out.write(reinterpret_cast<const char *>(&my_user), sizeof(my_user));
+    out.write((char*)(&my_user), sizeof(my_user));
     cout << "Saved!" << endl;
     out.flush();
     out.clear();
     out.close();
+    cout << "End write user ";
 }
 
-User read_user(std::string const &main_username)
+User read_user(std::string main_username)
 {
-    User tmp;
-    std::ifstream in("../userslist.dat", std::ios::in | std::ios::binary);
-    in.seekg(0, std::ios::beg);
+    std::ifstream in("../userslist.dat", std::ios::binary);
     if (!in)
     {
-        std::cout << "error on file!" << std::endl;
+        cout << "error open in" << endl;
     }
+    in.seekg(0, std::ios::beg);
     while (!in.eof())
     {
-        in.read(reinterpret_cast<char *>(&tmp), sizeof(tmp));
-        if (tmp.get_username() == main_username)
-        {
-            cout << "Read User:" << tmp.get_username() << ' ' << tmp.get_password() << endl;
-            in.clear();
-            in.close();
-            return tmp;
+        cout << "while" << endl;
+        User tmp_user;
+        tmp_user.password.reserve(2);
+        tmp_user.username.reserve(2);
+        in.read(reinterpret_cast<char *>(&tmp_user), sizeof(User));
+
+        cout << "while2" << endl;
+        if ( tmp_user.get_password() == main_username){
+            cout << "found" << endl;
+            return tmp_user;
         }
     }
-    in.clear();
-    in.close();
+    cout << "not found " << endl;
     return User("404");
+
 }

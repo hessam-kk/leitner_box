@@ -1,4 +1,4 @@
-#include "../include/user.hpp"
+#include "user.hpp"
 #include <iostream>
 #include <string>
 
@@ -25,11 +25,11 @@ void User::set_username(std::string const &x)
 }
 std::string User::get_password() const
 {
-    return this->password;
+    return password;
 }
 std::string User::get_username() const
 {
-    return this->username;
+    return username;
 }
 
 User User::operator++()

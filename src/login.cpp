@@ -1,7 +1,9 @@
-#include "../include/login.hpp"
-#include "../include/file.hpp"
-#include "../include/user.hpp"
-#include "../hash-library-master/sha256.h"
+#include "login.hpp"
+#include "file.hpp"
+#include "user.hpp"
+#include "sha256.h"
+#include "nlohmann/json.hpp"
+
 #include <iostream>
 #include <string>
 
@@ -57,7 +59,7 @@ bool login()
     sf::Text user, pass;
     int cur_box = 0;
     User my_user;
-    SHA256 pass256; // To Store Password Crypted
+    SHA256 sha256; // To Store Password Crypted
 
     while (window.isOpen())
     {
@@ -83,12 +85,8 @@ bool login()
                 // Click On ENTER
                 if (Enter_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
+                    cout << "Enter User:" << username << " Pass:" << password << endl;
                     my_user = read_user(username);
-                    // my_user.set_password(pass256("hessam"));
-                    cout << "User " << my_user.get_username() << endl;
-                    cout << "Password: " << password << endl;
-                    cout << "Pass: " << my_user.get_password() << endl;
-                    cout << my_user.get_password() << endl;
                     if (my_user.get_username() == "404")
                     {
                         cout << "no user available" << endl;
@@ -101,7 +99,6 @@ bool login()
                         }
                         else {
                             cout << "Wrong Password!!" << endl;
-
                         }
                     }
                 } // End Click On Enter
@@ -203,6 +200,7 @@ bool login()
         window.draw(Sign_sprite);
         window.display();
     }
+    return 1;
 }
 
 // TODO show Star for pass
