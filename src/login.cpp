@@ -1,4 +1,6 @@
 #include "../include/login.hpp"
+#include "../include/file.hpp"
+#include "../include/user.hpp"
 #include "../hash-library-master/sha256.h"
 #include <iostream>
 #include <string>
@@ -43,7 +45,7 @@ bool login()
     string input = "", tmp_user = "", tmp_pass = "", username = "", password = "";
     sf::Text user, pass;
     int cur_box = 0;
-
+    User my_user;
     SHA256 pass256; // To Store Password Crypted
 
     while (window.isOpen())
@@ -66,7 +68,19 @@ bool login()
                 else if (rec2.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                     cur_box = 1;
                 // End Choose UserName Or Password
-                
+                if (Enter_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    my_user = read_user();
+                    // my_user.set_password(pass256("hessam"));
+                    cout << "User " << my_user.get_username() << endl;
+                    cout << "Password: " << password << endl;
+                    cout << "Pass: " << my_user.get_password() << endl;
+                    cout << my_user.get_password() << endl;
+                    if (pass256(password) == my_user.get_password() )
+                    {
+                        cout << "Login Successful!!" << endl;
+                    }
+                }
             }
             // End Choose UserName Or Password
             // End Mouse Click
