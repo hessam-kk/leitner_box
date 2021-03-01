@@ -8,6 +8,7 @@
 #include <array>
 #include <stdexcept>
 #include <unistd.h>
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
