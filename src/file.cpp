@@ -1,8 +1,9 @@
 #include "../include/file.hpp"
 #include "../include/word.hpp"
+#include "../include/user.hpp"
 #include <iostream>
 #include <fstream>
-
+#include <iomanip>
 void read_file(std::array<std::deque<Word>, 7> &arr)
 {
     Word inword;
@@ -53,10 +54,14 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
     out.close();
 }
 
-User& read_user()
+User read_user()
 {
-    User user;
+    User userT;
     std::ifstream in("../userslist.txt", std::ios::in);
+    if (!in)
+    {
+        std::cout << "error on file!" << std::endl;
+    }
     string name, pass;
     while (!in.eof())
     {
@@ -65,12 +70,12 @@ User& read_user()
         {
             continue;
         }
-        in.ignore();
         in >> pass;
-        user.set_username(name);
-        user.set_password(pass);
+        userT.set_username(name);
+        userT.set_password(pass);
         in.ignore(); // ignore \n
     }
     in.clear();
     in.close();
+    return userT;
 }
