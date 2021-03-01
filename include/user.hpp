@@ -5,8 +5,8 @@
 class User
 {
 public:
-    void set_password(std::string);
-    void set_username(std::string);
+    void set_password(std::string const &);
+    void set_username(std::string const &);
     std::string get_password() const;
     std::string get_username() const;
 
