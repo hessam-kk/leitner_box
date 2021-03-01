@@ -10,8 +10,6 @@ struct last_test
 };
 class User
 {
-    friend User read_user(std::string);
-
 public:
     User();
     User(std::string);
@@ -21,8 +19,9 @@ public:
     std::string get_password() const;
     std::string get_username() const;
     User operator++();
-    
-
+    unsigned int get_total_test() const;
+    double get_avg_score() const;
+    last_test get_last_test() const;
 private:
     std::string username;
     std::string password;
