@@ -189,6 +189,7 @@ void app()
             {
                 window.close();
             }
+            
             //  Mouse Moved
             if (event.type == sf::Event::MouseMoved)
             {
