@@ -39,10 +39,10 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
     {
         if (!arr[i].empty())
         {
-            out << arr[i].front().get_word() << ':'       // write word
-                << arr[i].front().get_meaning() << ';'    // write meaning
-                << i << std::endl;                        // write day
-            arr[i].pop_front();                           // delete element
+            out << arr[i].front().get_word() << ':'    // write word
+                << arr[i].front().get_meaning() << ';' // write meaning
+                << i << std::endl;                     // write day
+            arr[i].pop_front();                        // delete element
         }
         else
         {
@@ -51,4 +51,26 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
     }
     out.clear();
     out.close();
+}
+
+User& read_user()
+{
+    User user;
+    std::ifstream in("../userslist.txt", std::ios::in);
+    string name, pass;
+    while (!in.eof())
+    {
+        getline(in, name, ':'); // Reads User
+        if (name == "")
+        {
+            continue;
+        }
+        in.ignore();
+        in >> pass;
+        user.set_username(name);
+        user.set_password(pass);
+        in.ignore(); // ignore \n
+    }
+    in.clear();
+    in.close();
 }
