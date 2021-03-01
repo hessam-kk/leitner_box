@@ -2,7 +2,6 @@
 #include "file.hpp"
 #include "user.hpp"
 #include "sha256.h"
-#include "nlohmann/json.hpp"
 
 #include <iostream>
 #include <string>
@@ -60,7 +59,7 @@ bool login()
     int cur_box = 0;
     User my_user;
     SHA256 sha256; // To Store Password Crypted
-
+    
     while (window.isOpen())
     {
         sf::Event event;
