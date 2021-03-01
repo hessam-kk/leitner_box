@@ -1,4 +1,5 @@
 #include "../include/login.hpp"
+#include "../hash-library-master/sha256.h"
 #include <iostream>
 #include <string>
 
@@ -32,6 +33,9 @@ bool login()
     string input = "", tmp_user = "", tmp_pass = "", username = "", password = "";
     sf::Text user, pass;
     int cur_box = 1;
+
+    SHA256 pass256; // To Store Password Crypted
+
     while (window.isOpen())
     {
         sf::Event event;

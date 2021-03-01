@@ -8,6 +8,7 @@ set(SOURCES
     src/word.cpp
     src/file.cpp
     src/login.cpp
+    hash-library-master/sha256.cpp
 )
 include_directories(include/)
 add_executable(app ${SOURCES})
