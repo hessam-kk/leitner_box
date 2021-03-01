@@ -32,8 +32,19 @@ bool login()
         cout << "Error On Loading Enter-hover Image" << endl;
     sf::Sprite Enter_sprite;
     Enter_sprite.setTexture(Enter_texture);
-    Enter_sprite.setPosition(650, 600);
+    Enter_sprite.setPosition(500, 600);
     // End add Enter Icon
+    // Add Sign Icon
+    sf::Texture Sign_texture, Sign_texture_hover;
+    if (!Sign_texture.loadFromFile("../assets/images/NewRed/Sign.png"))
+        cout << "Error On Loading Sign Image" << endl;
+    if (!Sign_texture_hover.loadFromFile("../assets/images/NewRed/Sign-hover.png"))
+        cout << "Error On Loading Sign-hover Image" << endl;
+    sf::Sprite Sign_sprite;
+    Sign_sprite.setTexture(Sign_texture);
+    Sign_sprite.setPosition(810, 600);
+    // End add Sign Icon
+    // Password And UserName Boxes
     sf::RectangleShape rec1, rec2;
     rec1.setSize(sf::Vector2f(480, 82));
     rec1.setPosition(560, 330);
@@ -70,7 +81,7 @@ bool login()
                 // End Choose UserName Or Password
                 if (Enter_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-                    my_user = read_user();
+                    my_user = read_user(username);
                     // my_user.set_password(pass256("hessam"));
                     cout << "User " << my_user.get_username() << endl;
                     cout << "Password: " << password << endl;
@@ -84,6 +95,7 @@ bool login()
             }
             // End Choose UserName Or Password
             // End Mouse Click
+            // Mouse Move
             if (event.type == sf::Event::MouseMoved)
             {
                 // Enter Icon
@@ -94,6 +106,15 @@ bool login()
                 else
                 {
                     Enter_sprite.setTexture(Enter_texture);
+                }
+                // Sign Icon
+                if (Sign_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    Sign_sprite.setTexture(Sign_texture_hover);
+                }
+                else
+                {
+                    Sign_sprite.setTexture(Sign_texture);
                 }
             }
 
@@ -146,6 +167,7 @@ bool login()
         window.draw(user);
         window.draw(pass);
         window.draw(Enter_sprite);
+        window.draw(Sign_sprite);
         window.display();
     }
 }
