@@ -1,0 +1,185 @@
+commit 41984eb8190084e492938ee3700fcb1f98ba19f0
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Thu Feb 18 16:10:50 2021 +0330
+
+    FIXED: Theme not switched
+
+commit 392520b71a38a16283c4458871534df8d5d9a6b5
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Thu Feb 18 15:40:25 2021 +0330
+
+    add button for themes
+
+commit 28d4c1cc54db0e674a4322954dd99fe5448e0305
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Thu Feb 18 14:47:09 2021 +0330
+
+    Added 6 Theme colors in dark & light & font color
+
+commit 4d8990080c82cfc6139e41b40f7863106da703c2
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 23:14:45 2021 +0330
+
+    Fixed Error if a 7-day word completed
+
+commit ef55b0ddb1df3954e8261ee809d80e838956f81e
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 23:10:30 2021 +0330
+
+    add Comments
+
+commit 8b1919e1e5106d2f20d3eb0b0d8a738b37c635c2
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 23:04:36 2021 +0330
+
+    add prev_click controler
+
+commit 4b244af3e1af6ba9c1e6b09de9eb26c67f848157
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 22:44:14 2021 +0330
+
+    change icons and themes
+
+commit b37f21ed24a72fb35863a6cfa8c461fcf945d58f
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 20:00:13 2021 +0330
+
+    Finding First word of the list
+
+commit 14a82c9a2e45f76673c4c2a1ab17faca4a95274d
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 19:52:17 2021 +0330
+
+    add OK & NO icon & clicling on them
+
+commit d98ed3e4151f4af7ad44be4da8b9256498b6920f
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 19:08:29 2021 +0330
+
+    add Meaning text to main window
+
+commit ae234282ccbf1aa4d477314ed87088b58edd702d
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 16:17:08 2021 +0330
+
+    Remove ADD-Icon-Click icon
+
+commit 1240bc09d3af1d7e78551f23bf4c0041ee559bcc
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 16:14:50 2021 +0330
+
+    Add Boxes To Background & change icon size
+
+commit c720c3eb1901246a846aaa3f4d74113e8bc071c1
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 15:54:13 2021 +0330
+
+    Add WRITE_FILE function
+
+commit dbcd4ea2aea35d5c3ba8c11a49b2f0ff02adc48f
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 15:37:15 2021 +0330
+
+    Add READ_FILE function
+
+commit 619779d9df2ac24399489eed239b9035b3d32bc5
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 15:19:50 2021 +0330
+
+    Add 7 Container for words
+
+commit e2e164af6ea769e7714c1030bb9b04d128a6dc6c
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 14:56:38 2021 +0330
+
+    Add Class Word
+
+commit 5c193896e6d6de930a2eb6d09868434680cdf5da
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 14:30:05 2021 +0330
+
+    ADD-box: FIXED: input not containing :
+
+commit 22665c6b46598bf57423211b3b70d6e8b7b1eac2
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 14:27:24 2021 +0330
+
+    ADD-box: showing text on box
+
+commit eb743b2fc7b7db8f8a530ce0c4da68b831f21d69
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 14:21:10 2021 +0330
+
+    ADD-box: input text
+
+commit 18e9423c789a51b373d3e54e4e19b116be3e747a
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 14:19:25 2021 +0330
+
+    ADD-box: input text
+
+commit 8825151da6885b0dcf7ac0b2fd8267624e826fde
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 14:13:36 2021 +0330
+
+    ADD-Box & theming for that
+
+commit 98a52a441bff54fdf8585b61721dd6d4793da676
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 13:51:24 2021 +0330
+
+    new windows for add button
+
+commit 23db102285b37a5dbc809b15cbb4a7d00f8287ab
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 13:41:23 2021 +0330
+
+    ADD-ICON Hover & Click
+
+commit e040649d92ca10be9a84407e011f173808aca7a2
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 13:33:34 2021 +0330
+
+    add ADD ICON
+
+commit bc941edebd37d46e4fd8786f845c2da1a0263039
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Wed Feb 17 13:30:03 2021 +0330
+
+    add ADD ICON
+
+commit 6b493b2670b936bc4cae87f39223160640c33dea
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Tue Feb 16 23:17:43 2021 +0330
+
+    add feature: theme-switching
+
+commit 36e305dad24e086b3a2941c53cead5b01f2c9282
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Tue Feb 16 22:58:23 2021 +0330
+
+    add background BLUE LIGHT and window
+
+commit 6c27cb37ef67864426d02461f260f0b0810878e5
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Tue Feb 16 22:57:49 2021 +0330
+
+    add assets/files to gitignore
+
+commit 7b408ce9c5b0a0c34ab008e735de468bcb76b409
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Tue Feb 16 22:31:05 2021 +0330
+
+    Add gitignore
+
+commit e86017a67a7650fd96efb9a97bfb2d05772f526f
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Tue Feb 16 22:30:34 2021 +0330
+
+    add initial files
+
+commit b8ab626dafaf68f434b0493e5fb1ea19c20d8556
+Author: Hessam <hessam2koucheki@gmail.com>
+Date:   Tue Feb 16 22:19:38 2021 +0330
+
+    Add Cmake list
