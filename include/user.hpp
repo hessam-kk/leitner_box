@@ -13,4 +13,4 @@ public:
 private:
     std::string username;
     std::string password;
-}
+};

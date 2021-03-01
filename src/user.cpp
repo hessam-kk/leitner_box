@@ -12,6 +12,7 @@ void User::set_username(std::string x)
 }
 std::string User::get_password() const
 {
+    std::cout << this->password << std::endl;
     return this->password;
 }
 std::string User::get_username() const
