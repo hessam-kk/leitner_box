@@ -6,5 +6,5 @@
 
 void read_file(std::array<std::deque<Word>, 7> &);
 void write_file(std::array<std::deque<Word>, 7> &);
-void write_user(User );
+void write_user(User const &);
 User read_user(std::string );

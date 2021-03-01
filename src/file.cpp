@@ -58,16 +58,17 @@ void write_file(std::array<std::deque<Word>, 7> &arr)
     out.close();
 }
 
-void write_user(User my_user)
+void write_user(User const & u)
 {
-    cout << "Start write user : " << my_user.get_username()
-         << ' ' << my_user.get_password() << endl;
-    User tmp;
-    // std::ifstream in("../userslist.dat", std::ios::ate | std::ios::in | std::ios::binary);
-    std::ofstream out("../userslist.dat", std::ios::app | std::ios::binary);
-    out.seekp(std::ios::end);
-    out.write((char*)(&my_user), sizeof(my_user));
-    cout << "Saved!" << endl;
+    std::ofstream out("../userslist.dat", std::ios::app);
+    if (!out)
+    {
+        cout << "error open out file" << endl;
+    }
+    out << '[' + u.get_username() + ':' + u.get_password() + ',';
+    out << u.get_total_test() + ',' + u.get_avg_score() + ',' ;
+    out << u.get_last_test().total_questions + ',' +  u.get_last_test().avg_score + ',';
+    out <<  u.get_last_test().corrects + ',' +  u.get_last_test().wrongs + ']';
     out.flush();
     out.clear();
     out.close();
@@ -79,24 +80,22 @@ User read_user(std::string main_username)
     std::ifstream in("../userslist.dat", std::ios::binary);
     if (!in)
     {
-        cout << "error open in" << endl;
+        cout << "error open in file" << endl;
     }
     in.seekg(0, std::ios::beg);
     while (!in.eof())
     {
         cout << "while" << endl;
         User tmp_user;
-        tmp_user.password.reserve(2);
-        tmp_user.username.reserve(2);
         in.read(reinterpret_cast<char *>(&tmp_user), sizeof(User));
 
         cout << "while2" << endl;
-        if ( tmp_user.get_password() == main_username){
+        if (tmp_user.get_password() == main_username)
+        {
             cout << "found" << endl;
             return tmp_user;
         }
     }
     cout << "not found " << endl;
     return User("404");
-
 }
