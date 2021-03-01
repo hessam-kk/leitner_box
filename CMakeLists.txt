@@ -10,6 +10,7 @@ set(SOURCES
     src/login.cpp
     src/user.cpp
     src/choose.cpp
+    src/test_summery.cpp
     hash-library-master/sha256.cpp
 )
 include_directories(include/)
