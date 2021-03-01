@@ -79,6 +79,8 @@ bool login()
                 else if (rec2.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                     cur_box = 1;
                 // End Choose UserName Or Password
+
+                // Click On ENTER
                 if (Enter_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
                     my_user = read_user(username);
@@ -87,11 +89,42 @@ bool login()
                     cout << "Password: " << password << endl;
                     cout << "Pass: " << my_user.get_password() << endl;
                     cout << my_user.get_password() << endl;
-                    if (pass256(password) == my_user.get_password() )
+                    if (my_user.get_username() == "404")
                     {
-                        cout << "Login Successful!!" << endl;
+                        cout << "no user available" << endl;
+                    }
+                    else
+                    {
+                        if (password == my_user.get_password())
+                        {
+                            cout << "Login Successful!!" << endl;
+                        }
+                        else {
+                            cout << "Wrong Password!!" << endl;
+
+                        }
+                    }
+                } // End Click On Enter
+                // Click On Sign in
+                if (Sign_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    // Search for Username account
+                    my_user = read_user(username);
+                    // cout << "User " << my_user.get_username() << endl;
+                    // cout << "Password: " << password << endl;
+                    // cout << "Pass: " << my_user.get_password() << endl;
+                    if (my_user.get_username() == "404")
+                    {
+                        my_user = User(username, password);
+                        write_user(my_user);
+                        cout << "signed UP" << endl;
+                    }
+                    else
+                    {
+                        cout << "duplicated" << endl;
                     }
                 }
+                // End Click On Sign in
             }
             // End Choose UserName Or Password
             // End Mouse Click
@@ -116,7 +149,7 @@ bool login()
                 {
                     Sign_sprite.setTexture(Sign_texture);
                 }
-            }
+            } // End Mouse Move
 
             // Hanlding Entering Text
             if (event.type == sf::Event::TextEntered)
