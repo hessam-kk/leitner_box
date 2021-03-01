@@ -15,7 +15,7 @@ int main()
     // login();
     if (choose() == 0) // learn
     {
-        // learn();
+        app();
     }
     else
     {
