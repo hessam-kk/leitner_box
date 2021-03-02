@@ -4,7 +4,7 @@
 struct last_test
 {
     unsigned short int total_questions = 0;
-    float avg_score = 0;
+    int avg_score = 0;
     unsigned int corrects = 0;
     unsigned int wrongs = 0;
 };
