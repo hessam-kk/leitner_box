@@ -22,11 +22,17 @@ void test_summery(User & Primary)
     background_sprite.setTexture(background_texture);
     // End add a Background
 
-    sf::Text username, total_tests, avg_score;
+    sf::Text username, total_tests, avg_score, last_score, corrects, wrongs, total_questions, percantage;
     username.setString(Primary.get_username());
     total_tests.setString(std::to_string(Primary.get_total_test()));
     avg_score.setString(std::to_string(Primary.get_avg_score()));
-    cout << Primary.get_avg_score() << endl;
+    last_score.setString(std::to_string(Primary.get_last_test().avg_score));
+    corrects.setString(std::to_string(Primary.get_last_test().corrects));
+    wrongs.setString(std::to_string(Primary.get_last_test().wrongs));
+    total_questions.setString(std::to_string(Primary.get_last_test().total_questions));
+    percantage.setString(std::to_string(Primary.get_last_test().avg_score));
+    
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -57,10 +63,42 @@ void test_summery(User & Primary)
         avg_score.setCharacterSize(135);
         avg_score.setPosition(sf::Vector2f(1250, 620));
 
+        last_score.setFont(font);
+        last_score.setFillColor(sf::Color::Black);
+        last_score.setCharacterSize(50);
+        last_score.setPosition(sf::Vector2f(260, 540));
+
+        corrects.setFont(font);
+        corrects.setFillColor(sf::Color::Black);
+        corrects.setCharacterSize(45);
+        corrects.setPosition(sf::Vector2f(850, 540));
+
+        wrongs.setFont(font);
+        wrongs.setFillColor(sf::Color::Black);
+        wrongs.setCharacterSize(45);
+        wrongs.setPosition(sf::Vector2f(850, 590));
+
+        total_questions.setFont(font);
+        total_questions.setFillColor(sf::Color::Black);
+        total_questions.setCharacterSize(45);
+        total_questions.setPosition(sf::Vector2f(950, 640));
+
+        percantage.setFont(font);
+        percantage.setFillColor(sf::Color::Black);
+        percantage.setCharacterSize(45);
+        percantage.setPosition(sf::Vector2f(850, 690));
+
+
+// last_score, corrects, wrongs, total_questions, percantage;
         window.draw(background_sprite);
         window.draw(username);
         window.draw(total_tests);
         window.draw(avg_score);
+        window.draw(last_score);
+        window.draw(corrects);
+        window.draw(wrongs);
+        window.draw(total_questions);
+        window.draw(percantage);
         window.display();
     }
 }
