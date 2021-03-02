@@ -44,7 +44,7 @@ unsigned int User::get_total_test() const
     return this->total_tests;
 }
 
-double User::get_avg_score() const
+int User::get_avg_score() const
 {
     return this->avg_scores;
 }
