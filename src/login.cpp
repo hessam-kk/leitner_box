@@ -45,6 +45,14 @@ bool login(User &primary)
     Sign_sprite.setTexture(Sign_texture);
     Sign_sprite.setPosition(810, 600);
     // End add Sign Icon
+    // Pass Box
+    sf::Texture Passbox_texture;
+    if (!Passbox_texture.loadFromFile("../assets/images/NewRed/Passbox.png"))
+        cout << "Error On Loading Passbox Image" << endl;
+    sf::Sprite Passbox_sprite;
+    Passbox_sprite.setTexture(Passbox_texture);
+    Passbox_sprite.setPosition(560, 330);
+
     // Password And UserName Boxes
     sf::RectangleShape rec1, rec2;
     rec1.setSize(sf::Vector2f(480, 82));
@@ -182,16 +190,18 @@ bool login(User &primary)
         font.loadFromFile("../assets/fonts/Poppins-Regular.ttf");
         user.setFont(font);
         user.setFillColor(sf::Color::Black);
-        user.setCharacterSize(22);
-        user.setPosition(sf::Vector2f(585, 355));
+        user.setCharacterSize(32);
+        user.setPosition(sf::Vector2f(585, 355 - 5));
         pass.setFont(font);
         pass.setFillColor(sf::Color::Black);
-        pass.setCharacterSize(22);
-        pass.setPosition(sf::Vector2f(585, 515));
+        pass.setCharacterSize(32);
+        pass.setPosition(sf::Vector2f(585, 515 - 5));
         tmp_user = username.substr(0, username.length() - 1); // Keeping Last input for usage in backsapce
         tmp_pass = password.substr(0, password.length() - 1); // Keeping Last input for usage in backsapce
 
         window.draw(background_sprite);
+        cur_box ? Passbox_sprite.setPosition(560, 490-1) : Passbox_sprite.setPosition(560, 330);
+        window.draw(Passbox_sprite);
         // window.draw(rec1);
         // window.draw(rec2);
         window.draw(user);
@@ -200,7 +210,7 @@ bool login(User &primary)
         window.draw(Sign_sprite);
         window.display();
     }
-    return 1;
+    return 0;
 }
 
 // TODO show Star for pass
