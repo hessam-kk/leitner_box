@@ -10,7 +10,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-void test_summery(User & Primary)
+void test_summery(User &Primary)
 {
     sf::RenderWindow window(sf::VideoMode(1600, 960), "Test_summery", sf::Style::Close);
     window.requestFocus();
@@ -21,7 +21,16 @@ void test_summery(User & Primary)
     sf::Sprite background_sprite;
     background_sprite.setTexture(background_texture);
     // End add a Background
-
+    // Add Start Icon
+    sf::Texture Start_texture, Start_texture_hover;
+    if (!Start_texture.loadFromFile("../assets/images/NewRed/Start.png"))
+        cout << "Error On Loading Start Image" << endl;
+    if (!Start_texture_hover.loadFromFile("../assets/images/NewRed/Start-hover.png"))
+        cout << "Error On Loading Start-hover Image" << endl;
+    sf::Sprite Start_sprite;
+    Start_sprite.setTexture(Start_texture);
+    Start_sprite.setPosition(235, 150);
+    // End add Enter Icon
     sf::Text username, total_tests, avg_score, last_score, corrects, wrongs, total_questions, percantage;
     username.setString(Primary.get_username());
     total_tests.setString(std::to_string(Primary.get_total_test()));
@@ -31,7 +40,6 @@ void test_summery(User & Primary)
     wrongs.setString(std::to_string(Primary.get_last_test().wrongs));
     total_questions.setString(std::to_string(Primary.get_last_test().total_questions));
     percantage.setString(std::to_string(Primary.get_last_test().avg_score));
-    
 
     while (window.isOpen())
     {
@@ -43,6 +51,19 @@ void test_summery(User & Primary)
             if (event.type == sf::Event::EventType::Closed)
             {
                 window.close();
+            }
+            // Mouse Move
+            if (event.type == sf::Event::MouseMoved)
+            {
+                // Enter Icon
+                if (Start_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    Start_sprite.setTexture(Start_texture_hover);
+                }
+                else
+                {
+                    Start_sprite.setTexture(Start_texture);
+                }
             }
         }
 
@@ -88,8 +109,7 @@ void test_summery(User & Primary)
         percantage.setCharacterSize(45);
         percantage.setPosition(sf::Vector2f(850, 690));
 
-
-// last_score, corrects, wrongs, total_questions, percantage;
+        // last_score, corrects, wrongs, total_questions, percantage;
         window.draw(background_sprite);
         window.draw(username);
         window.draw(total_tests);
@@ -99,6 +119,7 @@ void test_summery(User & Primary)
         window.draw(wrongs);
         window.draw(total_questions);
         window.draw(percantage);
+        window.draw(Start_sprite);
         window.display();
     }
 }
