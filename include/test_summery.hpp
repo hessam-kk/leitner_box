@@ -1,3 +1,3 @@
 #pragma once
-
-void test_summery();
+#include "user.hpp"
+void test_summery(User &);
