@@ -16,8 +16,8 @@ public:
     User();
     User(std::string);
     User(std::string, std::string);
-    void set_password(std::string const &);
-    void set_username(std::string const &);
+    virtual void set_password(std::string const &) final;
+    virtual void set_username(std::string const &) final;
     std::string get_password() const;
     std::string get_username() const;
     User operator++();
