@@ -187,7 +187,7 @@ bool login(User &primary)
         // Prepairing Text
         sf::Font font;
         sf::Color color;
-        font.loadFromFile("../assets/fonts/Poppins-Regular.ttf");
+        font.loadFromFile("../assets/fonts/PlayfairDisplay-BoldItalic.ttf");
         user.setFont(font);
         user.setFillColor(sf::Color::Black);
         user.setCharacterSize(32);
