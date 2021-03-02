@@ -21,7 +21,7 @@
 
 using namespace std;
 
-void app()
+void app(User & Primary)
 {
     string Theme_mode[2] = {"light", "dark"};
     string Theme_color[6] = {"blue", "red", "green", "yellow", "purple", "pink"};
@@ -155,7 +155,7 @@ void app()
     // end theme-Icons
 
     array<deque<Word>, 7> arr;
-    read_file(arr);
+    read_file(arr, Primary.get_username());
     Word word;
 
     sf::Text word_text, meaning_text, cur_day_text;
@@ -448,5 +448,5 @@ void app()
 
         window.display();
     }
-    write_file(arr);
+    write_file(arr, Primary.get_username());
 }
