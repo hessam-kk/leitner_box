@@ -4,7 +4,9 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <unistd.h>
 
+using std::cerr;
 using std::cout;
 using std::endl;
 
@@ -16,6 +18,14 @@ void read_file(std::array<std::deque<Word>, 7> &arr, std::string const &Username
     unsigned short int day;
 
     std::ifstream in("../db_" + Username + ".dat", std::ios::in);
+    if (!in)
+    {
+        cerr << "Error on opening the file db_" + Username + ".dat" << endl;
+        string commnand = "cp ../db.dat ../db_" + Username + ".dat";
+        system(commnand.c_str());
+        sleep(1);
+        std::fstream in("../db_" + Username + ".dat");
+    }
     while (!in.eof())
     {
         getline(in, word, ':');

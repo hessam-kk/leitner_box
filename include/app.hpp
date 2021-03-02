@@ -1,3 +1,3 @@
 #pragma once
-
-void app();
+#include "user.hpp"
+void app(User & );
