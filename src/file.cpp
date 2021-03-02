@@ -8,14 +8,14 @@
 using std::cout;
 using std::endl;
 
-void read_file(std::array<std::deque<Word>, 7> &arr)
+void read_file(std::array<std::deque<Word>, 7> &arr, std::string const &Username)
 {
     Word inword;
     std::string word;
     std::string meaning;
     unsigned short int day;
 
-    std::ifstream in("../db.dat", std::ios::in);
+    std::ifstream in("../db_" + Username + ".dat", std::ios::in);
     while (!in.eof())
     {
         getline(in, word, ':');
@@ -36,9 +36,9 @@ void read_file(std::array<std::deque<Word>, 7> &arr)
 }
 
 // word : meaning ;2
-void write_file(std::array<std::deque<Word>, 7> &arr)
+void write_file(std::array<std::deque<Word>, 7> &arr, std::string const &Username)
 {
-    std::ofstream out("../db.dat", std::ios::out);
+    std::ofstream out("../db_" + Username + ".dat", std::ios::out);
     int i = 0;
     while (i < 7)
     {
