@@ -54,7 +54,7 @@ bool choose()
             {
                 window.close();
             }
-             // Mouse Click
+            // Mouse Click
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 // Click on Learn
@@ -70,7 +70,7 @@ bool choose()
                     return 1;
                 }
             }
-             // Mouse Move
+            // Mouse Move
             if (event.type == sf::Event::MouseMoved)
             {
                 // Exam Icon

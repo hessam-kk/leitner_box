@@ -11,20 +11,20 @@ using namespace std;
 int main()
 {
     User Primary;
-    // Primary = read_user("hes");?
+    // Primary = read_user("hes");
     // cout << Primary.get_password() << endl;
     if (login(Primary))
     {
-        cout << Primary.get_password() << endl;
-        if (choose() == 0) // learn
+
+        int T = choose();
+        if (T == 0) // learn
         {
-            app();
+            app(Primary);
         }
-        else // Exam
+        else if (T == 1) // Exam
         {
-            test_summery();
+            test_summery(Primary);
         }
-        // app();
     }
     return 0;
 }
