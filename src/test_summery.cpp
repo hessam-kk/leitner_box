@@ -1,4 +1,5 @@
 #include "test_summery.hpp"
+#include "real_test.hpp"
 #include <iostream>
 #include <string>
 
@@ -64,6 +65,14 @@ void test_summery(User &Primary)
                 {
                     Start_sprite.setTexture(Start_texture);
                 }
+            }
+              // Mouse Click
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                // Enter The Test
+                if (Start_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                    real_test(Primary);
+
             }
         }
 

@@ -11,6 +11,7 @@ set(SOURCES
     src/user.cpp
     src/choose.cpp
     src/test_summery.cpp
+    src/real_test.cpp
     hash-library-master/sha256.cpp
     
 )
