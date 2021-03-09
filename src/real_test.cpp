@@ -150,14 +150,14 @@ void real_test(User &Primary)
             {
                 cout << "Mouse: " << endl;
                 // Choose corect Word
-                if (correct_mean.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                if (wordbox_top_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
                     cout << "correct mean pressed!" << endl;
                     word_number++;
                     cout << word_number << endl;
                 }
                 // Choose wrong Word
-                if (wrong_mean.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                if (wordbox_but_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
                     cout << "wrong mean pressed!" << endl;
                     word_number++;
