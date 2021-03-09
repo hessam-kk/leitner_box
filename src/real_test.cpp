@@ -29,6 +29,20 @@ void real_test(User &Primary)
     sf::Sprite background_sprite;
     background_sprite.setTexture(background_texture);
     // End Of Adding Background
+    // word Box top
+    sf::Texture wordbox_top_texture;
+    if (!wordbox_top_texture.loadFromFile("../assets/images/NewRed/wordbox_top.png"))
+        cout << "Error On Loading wordbox top Image" << endl;
+    sf::Sprite wordbox_top_sprite;
+    wordbox_top_sprite.setTexture(wordbox_top_texture);
+    wordbox_top_sprite.setPosition(758, 315);
+    // word Box button
+    sf::Texture wordbox_but_texture;
+    if (!wordbox_but_texture.loadFromFile("../assets/images/NewRed/wordbox_but.png"))
+        cout << "Error On Loading wordbox butt Image" << endl;
+    sf::Sprite wordbox_but_sprite;
+    wordbox_but_sprite.setTexture(wordbox_but_texture);
+    wordbox_but_sprite.setPosition(758, 542);
 
     int cur_list;
     sf::Text cur_word, correct_mean, wrong_mean;
@@ -55,14 +69,16 @@ void real_test(User &Primary)
             int place = rand() % (total_words.size() - 1);
             std::string word = total_words.at(place).get_word();
             tmp.set_word(word);
-            // Setting
+            // Setting meaning
             std::string mean = total_words.at(place).get_meaning();
             tmp.set_meaning(mean);
             // Removing word to avoid duplication
             total_words.erase(total_words.begin() + place);
+            // setting a random word for another opton(wrong meaning)
             srand(time(NULL));
             place = rand() % (total_words.size() - 1);
             tmp.set_wrong_meaning(total_words[place].get_word());
+            // Adding it to list
             test_word_list.push_back(tmp);
         }
     }
@@ -76,22 +92,32 @@ void real_test(User &Primary)
             int place = rand() % (total_words.size() - 1);
             std::string word = total_words.at(place).get_word();
             tmp.set_word(word);
-            // Setting
+            // Setting meaning
             std::string mean = total_words.at(place).get_meaning();
             tmp.set_meaning(mean);
             // Removing word to avoid duplication
             total_words.erase(total_words.begin() + place);
+            // setting a random word for another opton(wrong meaning)
             srand(time(NULL));
             place = rand() % (total_words.size() - 1);
             tmp.set_wrong_meaning(total_words[place].get_word());
+            // Adding it to list
             test_word_list.push_back(tmp);
         }
     }
+    cout << test_word_list[0].get_word() << endl;
+    cout << test_word_list[0].get_meaning() << endl;
+    cout << test_word_list[0].get_wrong_meaning() << endl;
+    cout << "----------" << endl;
+    cout << test_word_list[1].get_word() << endl;
+    cout << test_word_list[1].get_meaning() << endl;
+    cout << test_word_list[1].get_wrong_meaning() << endl;
+    int word_number = 0;
 
     while (window.isOpen())
     {
+        window.draw(background_sprite);
         sf::Event event;
-        std::string str;
         while (window.pollEvent(event))
         {
             // Close Window
@@ -100,11 +126,44 @@ void real_test(User &Primary)
                 window.close();
             }
             // Initialzing SFML type to show them
-            cur_word.setString(test_word_list.front().get_word());
-            correct_mean.setString(test_word_list.front().get_meaning());
-            wrong_mean.setString(test_word_list.front().get_wrong_meaning());
+            cur_word.setString(test_word_list[word_number].get_word());
+            correct_mean.setString(test_word_list[word_number].get_meaning());
+            wrong_mean.setString(test_word_list[word_number].get_wrong_meaning());
 
+            //  Mouse Moved
+            if (event.type == sf::Event::MouseMoved)
+            {
+                // ADD Icon
+                if (wordbox_top_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    window.draw(wordbox_top_sprite);
+                }
+                if (wordbox_but_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
+                {
+                    window.draw(wordbox_but_sprite);
+                }
+                
+            }
 
+            // Mouse Click
+            if (event.type == sf::Event::MouseButtonPressed)
+            {
+                cout << "Mouse: " << endl;
+                // Choose corect Word
+                if (correct_mean.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "correct mean pressed!" << endl;
+                    word_number++;
+                    cout << word_number << endl;
+                }
+                // Choose wrong Word
+                if (wrong_mean.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
+                {
+                    cout << "wrong mean pressed!" << endl;
+                    word_number++;
+                    cout << word_number << endl;
+                }
+            }
         }
         // Prepairing Text
         sf::Font font;
@@ -122,9 +181,6 @@ void real_test(User &Primary)
         wrong_mean.setFillColor(sf::Color::Black);
         wrong_mean.setCharacterSize(50);
         wrong_mean.setPosition(850, 600);
-
-
-        window.draw(background_sprite);
 
         window.draw(cur_word);
         window.draw(correct_mean);
