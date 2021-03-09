@@ -1,7 +1,7 @@
 #pragma once
 #include "word.hpp"
 
-class Word_in_test : Word
+class Word_in_test : public Word
 {
 public:
     void set_wrong_meaning(std::string);
