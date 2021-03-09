@@ -103,17 +103,16 @@ void real_test(User &Primary)
             test_word_list.push_back(tmp);
         }
     }
-    cout << test_word_list[0].get_word() << endl;
-    cout << test_word_list[0].get_meaning() << endl;
-    cout << test_word_list[0].get_wrong_meaning() << endl;
-    cout << "----------" << endl;
-    cout << test_word_list[1].get_word() << endl;
-    cout << test_word_list[1].get_meaning() << endl;
-    cout << test_word_list[1].get_wrong_meaning() << endl;
-    int word_number = 0;
 
+    int word_number = 0, correct_answers_count = 0, wrong_answers_count = 0;
+    int pos = -1;
     while (window.isOpen())
     {
+        // it is end of test
+        if (word_number == 10)
+        {
+            return;
+        }
         window.draw(background_sprite);
         sf::Event event;
         while (window.pollEvent(event))
@@ -131,11 +130,12 @@ void real_test(User &Primary)
             //  Mouse Moved
             if (event.type == sf::Event::MouseMoved)
             {
-                // ADD Icon
+                // Top Word Box
                 if (wordbox_top_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
                 {
                     window.draw(wordbox_top_sprite);
                 }
+                // Buttom Word Box
                 if (wordbox_but_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseMove.x, event.mouseMove.y)))
                 {
                     window.draw(wordbox_but_sprite);
@@ -145,21 +145,41 @@ void real_test(User &Primary)
             // Mouse Click
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                cout << "Mouse: " << endl;
                 // Choose Top Word
                 if (wordbox_top_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-                    cout << "correct mean pressed!" << endl;
+                    if (pos == 0) // correct meaning is at the top
+                    {
+                        cout << "correct mean pressed!" << endl;
+                        correct_answers_count++;
+                    }
+                    else // correct meaning is at the buttom
+                    {
+                        cout << "wrong mean pressed!" << endl;
+                        wrong_answers_count++;
+                    }
                     word_number++;
                     cout << word_number << endl;
                 }
                 // Choose buttom Word
                 if (wordbox_but_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
-                    cout << "wrong mean pressed!" << endl;
+                    if (pos == 1) // correct meaning is at the buttom
+                    {
+                        cout << "correct mean pressed!" << endl;
+                        correct_answers_count++;
+                    }
+                    else // correct meaning is at the top
+                    {
+                        cout << "wrong mean pressed!" << endl;
+                        wrong_answers_count++;
+                    }
                     word_number++;
                     cout << word_number << endl;
                 }
+                cout << "corrects: " << correct_answers_count << endl;
+                cout << "wrong: " << wrong_answers_count << endl;
+                cout << "--------------" << endl;
             }
         }
         // Prepairing Text
@@ -181,12 +201,14 @@ void real_test(User &Primary)
         if (static_cast<string>(cur_word.getString()).length() % 2 == 0)
         {
             correct_mean.setPosition(850, 400);
+            pos = 0;
             wrong_mean.setPosition(850, 600);
         }
         else
         {
             wrong_mean.setPosition(850, 400);
             correct_mean.setPosition(850, 600);
+            pos = 1;
         }
 
         window.draw(cur_word);
