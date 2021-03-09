@@ -32,18 +32,17 @@ void test_summery(User &Primary)
     Start_sprite.setTexture(Start_texture);
     Start_sprite.setPosition(235, 150);
     // End add Enter Icon
-    sf::Text username, total_tests, avg_score, last_score, corrects, wrongs, total_questions, percantage;
+    sf::Text username, total_tests, avg_score, last_score, corrects, wrongs, total_questions;
     username.setString(Primary.get_username());
-    total_tests.setString(std::to_string(Primary.get_total_test()));
-    avg_score.setString(std::to_string(Primary.get_avg_score()));
-    last_score.setString(std::to_string(Primary.get_last_test().avg_score));
-    corrects.setString(std::to_string(Primary.get_last_test().corrects));
-    wrongs.setString(std::to_string(Primary.get_last_test().wrongs));
-    total_questions.setString(std::to_string(Primary.get_last_test().total_questions));
-    percantage.setString(std::to_string(Primary.get_last_test().avg_score));
 
     while (window.isOpen())
     {
+        total_tests.setString(std::to_string(Primary.get_total_test()));
+        avg_score.setString(std::to_string(Primary.get_total_score()));
+        last_score.setString(std::to_string(Primary.last_one.score));
+        corrects.setString(std::to_string(Primary.last_one.corrects));
+        wrongs.setString(std::to_string(Primary.last_one.wrongs));
+        total_questions.setString(std::to_string(Primary.last_one.total_questions));
         sf::Event event;
         std::string str;
         while (window.pollEvent(event))
@@ -66,13 +65,12 @@ void test_summery(User &Primary)
                     Start_sprite.setTexture(Start_texture);
                 }
             }
-              // Mouse Click
+            // Mouse Click
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 // Enter The Test
                 if (Start_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                     real_test(Primary);
-
             }
         }
 
@@ -111,12 +109,7 @@ void test_summery(User &Primary)
         total_questions.setFont(font);
         total_questions.setFillColor(sf::Color::Black);
         total_questions.setCharacterSize(45);
-        total_questions.setPosition(sf::Vector2f(950, 640));
-
-        percantage.setFont(font);
-        percantage.setFillColor(sf::Color::Black);
-        percantage.setCharacterSize(45);
-        percantage.setPosition(sf::Vector2f(850, 690));
+        total_questions.setPosition(sf::Vector2f(940, 640));
 
         // last_score, corrects, wrongs, total_questions, percantage;
         window.draw(background_sprite);
@@ -127,7 +120,6 @@ void test_summery(User &Primary)
         window.draw(corrects);
         window.draw(wrongs);
         window.draw(total_questions);
-        window.draw(percantage);
         window.draw(Start_sprite);
         window.display();
     }
