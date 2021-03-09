@@ -56,12 +56,12 @@ void real_test(User &Primary)
             std::string word = total_words.at(place).get_word();
             tmp.set_word(word);
             // Setting
-            std::string mean = total_words.at(place).get_word();
+            std::string mean = total_words.at(place).get_meaning();
             tmp.set_meaning(mean);
             // Removing word to avoid duplication
             total_words.erase(total_words.begin() + place);
             srand(time(NULL));
-            int place = rand() % (total_words.size() - 1);
+            place = rand() % (total_words.size() - 1);
             tmp.set_wrong_meaning(total_words[place].get_word());
             test_word_list.push_back(tmp);
         }
@@ -77,12 +77,12 @@ void real_test(User &Primary)
             std::string word = total_words.at(place).get_word();
             tmp.set_word(word);
             // Setting
-            std::string mean = total_words.at(place).get_word();
+            std::string mean = total_words.at(place).get_meaning();
             tmp.set_meaning(mean);
             // Removing word to avoid duplication
             total_words.erase(total_words.begin() + place);
             srand(time(NULL));
-            int place = rand() % (total_words.size() - 1);
+            place = rand() % (total_words.size() - 1);
             tmp.set_wrong_meaning(total_words[place].get_word());
             test_word_list.push_back(tmp);
         }
@@ -99,11 +99,36 @@ void real_test(User &Primary)
             {
                 window.close();
             }
+            // Initialzing SFML type to show them
             cur_word.setString(test_word_list.front().get_word());
-            
+            correct_mean.setString(test_word_list.front().get_meaning());
+            wrong_mean.setString(test_word_list.front().get_wrong_meaning());
+
+
         }
+        // Prepairing Text
+        sf::Font font;
+        sf::Color color;
+        font.loadFromFile("../assets/fonts/PlayfairDisplay-BoldItalic.ttf");
+        cur_word.setFont(font);
+        cur_word.setFillColor(sf::Color::Black);
+        cur_word.setCharacterSize(50);
+        cur_word.setPosition(250, 500);
+        correct_mean.setFont(font);
+        correct_mean.setFillColor(sf::Color::Black);
+        correct_mean.setCharacterSize(50);
+        correct_mean.setPosition(850, 400);
+        wrong_mean.setFont(font);
+        wrong_mean.setFillColor(sf::Color::Black);
+        wrong_mean.setCharacterSize(50);
+        wrong_mean.setPosition(850, 600);
+
+
         window.draw(background_sprite);
 
+        window.draw(cur_word);
+        window.draw(correct_mean);
+        window.draw(wrong_mean);
         window.display();
     }
 }
