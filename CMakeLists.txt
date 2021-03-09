@@ -6,6 +6,7 @@ set(SOURCES
     src/app.cpp
     src/add.cpp
     src/word.cpp
+    src/word_in_test.cpp
     src/file.cpp
     src/login.cpp
     src/user.cpp
