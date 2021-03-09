@@ -16,11 +16,3 @@ string Word::get_meaning() const
 {
     return this->meaning;
 }
-// void Word::set_day(unsigned short int x)
-// {
-//     this->current_day = x;
-// }
-// unsigned short int Word::get_day() const
-// {
-//     return this->current_day;
-// }

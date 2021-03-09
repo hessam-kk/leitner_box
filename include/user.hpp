@@ -4,7 +4,7 @@
 struct last_test
 {
     unsigned short int total_questions = 0;
-    int avg_score = 0;
+    int score = 0;
     unsigned int corrects = 0;
     unsigned int wrongs = 0;
 };
@@ -25,6 +25,8 @@ public:
     int get_total_score() const;
     last_test get_last_test() const;
     last_test last_one;
+    void add_total_score(int);
+    void add_total_test();
 private:
     std::string username;
     std::string password;

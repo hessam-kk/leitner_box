@@ -38,7 +38,7 @@ User User::operator++(int)
     // Calculate the new avg score and increase total tests count
     // avg_scores = ((total_tests+1) * avg_scores + last_one.avg_score) / ++total_tests;
     this->total_tests++;
-    this->total_scores += last_one.avg_score;
+    this->total_scores += last_one.score;
 }
 
 unsigned int User::get_total_test() const
@@ -53,4 +53,12 @@ int User::get_total_score() const
 last_test User::get_last_test() const
 {
     return this->last_one;
+}
+
+void User::add_total_score(int x)
+{
+    this->total_scores += x;
+}
+void User::add_total_test(){
+    this->total_tests++;
 }
