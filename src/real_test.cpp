@@ -109,8 +109,20 @@ void real_test(User &Primary)
     while (window.isOpen())
     {
         // it is end of test
-        if (word_number == 10)
+        if (word_number == 9)
         {
+            try
+            {
+                Primary.last_one.avg_score = (correct_answers_count - wrong_answers_count) / 10;
+                Primary.last_one.corrects = correct_answers_count;
+                Primary.last_one.wrongs = wrong_answers_count;
+                Primary.last_one.total_questions = 10;
+                // Primary++;
+            }
+            catch (...)
+            {
+                cout << "Execption here" << endl;
+            }
             return;
         }
         window.draw(background_sprite);
