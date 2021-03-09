@@ -85,7 +85,7 @@ void write_user(User const &u)
         if (username == u.get_username())
         {
             out << u.get_username() << ' ' << u.get_password() + ',';
-            out << u.get_total_test() << ' ' << u.get_avg_score() << ' ';
+            out << u.get_total_test() << ' ' << u.get_total_score() << ' ';
             out << u.get_last_test().total_questions << ' ' << u.get_last_test().avg_score << ' ';
             out << u.get_last_test().corrects << ' ' << u.get_last_test().wrongs << '\n';
             out.flush();
@@ -98,7 +98,7 @@ void write_user(User const &u)
     out.seekp(std::ios::end);
     cout << "start write user " << endl;
     out << u.get_username() << ' ' << u.get_password() + ',';
-    out << u.get_total_test() << ' ' << u.get_avg_score() << ' ';
+    out << u.get_total_test() << ' ' << u.get_total_score() << ' ';
     out << u.get_last_test().total_questions << ' ' << u.get_last_test().avg_score << ' ';
     out << u.get_last_test().corrects << ' ' << u.get_last_test().wrongs << '\n';
 
@@ -131,7 +131,7 @@ User read_user(std::string main_username)
             in.ignore();
             getline(in, tmp_user.password, ',');
             in >> tmp_user.total_tests               //
-                >> tmp_user.avg_scores               //
+                >> tmp_user.total_scores             //
                 >> tmp_user.last_one.total_questions //
                 >> tmp_user.last_one.avg_score       //
                 >> tmp_user.last_one.corrects        //
