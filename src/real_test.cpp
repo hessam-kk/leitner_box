@@ -30,16 +30,12 @@ void real_test(User &Primary)
     background_sprite.setTexture(background_texture);
     // End Of Adding Background
 
-    deque<string> tested_word;
-    deque<string> meaning;
-    deque<string> other_meaning;
-
     int cur_list;
     sf::Text cur_word, correct_mean, wrong_mean;
     array<deque<Word>, 7> arr;
     read_file(arr, Primary.get_username());
     deque<Word> total_words;
-    // Store all words in a single list to use shuffle mode
+    // Store all words in a single list to aplly random
     for (size_t i = 0; i < 7; i++)
     {
         for (auto const &it : arr[i])
@@ -47,7 +43,8 @@ void real_test(User &Primary)
             total_words.push_back(it);
         }
     }
-    deque<Word> test_word_list;
+    // Initializing the Test_word_list for test
+    deque<Word_in_test> test_word_list;
     if (total_words.size() > 10)
     {
         while (test_word_list.size() < 10)
@@ -102,6 +99,8 @@ void real_test(User &Primary)
             {
                 window.close();
             }
+            cur_word.setString(test_word_list.front().get_word());
+            
         }
         window.draw(background_sprite);
 
