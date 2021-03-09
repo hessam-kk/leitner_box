@@ -20,14 +20,14 @@ public:
     virtual void set_username(std::string const &) final;
     std::string get_password() const;
     std::string get_username() const;
-    User operator++();
+    User operator++(int);
     unsigned int get_total_test() const;
-    int get_avg_score() const;
+    int get_total_score() const;
     last_test get_last_test() const;
+    last_test last_one;
 private:
     std::string username;
     std::string password;
     unsigned int total_tests = 0;
-    int avg_scores = 0;
-    last_test last_one;
+    int total_scores = 0;
 };

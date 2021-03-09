@@ -31,12 +31,14 @@ std::string User::get_username() const
     return this->username;
 }
 
-User User::operator++()
+User User::operator++(int)
 {
     // Calcualte Last Test statistics
-    last_one.avg_score = last_one.corrects - (1 / 3 * last_one.wrongs) / last_one.total_questions+1;
+    // last_one.avg_score = last_one.corrects - (1 / 3 * last_one.wrongs) / last_one.total_questions+1;
     // Calculate the new avg score and increase total tests count
-    avg_scores = ((total_tests+1) * avg_scores + last_one.avg_score) / ++total_tests;
+    // avg_scores = ((total_tests+1) * avg_scores + last_one.avg_score) / ++total_tests;
+    this->total_tests++;
+    this->total_scores += last_one.avg_score;
 }
 
 unsigned int User::get_total_test() const
@@ -44,9 +46,9 @@ unsigned int User::get_total_test() const
     return this->total_tests;
 }
 
-int User::get_avg_score() const
+int User::get_total_score() const
 {
-    return this->avg_scores;
+    return this->total_scores;
 }
 last_test User::get_last_test() const
 {
