@@ -142,21 +142,20 @@ void real_test(User &Primary)
                 {
                     window.draw(wordbox_but_sprite);
                 }
-                
             }
 
             // Mouse Click
             if (event.type == sf::Event::MouseButtonPressed)
             {
                 cout << "Mouse: " << endl;
-                // Choose corect Word
+                // Choose Top Word
                 if (wordbox_top_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
                     cout << "correct mean pressed!" << endl;
                     word_number++;
                     cout << word_number << endl;
                 }
-                // Choose wrong Word
+                // Choose buttom Word
                 if (wordbox_but_sprite.getGlobalBounds().contains(sf::Vector2f(event.mouseButton.x, event.mouseButton.y)))
                 {
                     cout << "wrong mean pressed!" << endl;
@@ -176,11 +175,21 @@ void real_test(User &Primary)
         correct_mean.setFont(font);
         correct_mean.setFillColor(sf::Color::Black);
         correct_mean.setCharacterSize(50);
-        correct_mean.setPosition(850, 400);
+
         wrong_mean.setFont(font);
         wrong_mean.setFillColor(sf::Color::Black);
         wrong_mean.setCharacterSize(50);
-        wrong_mean.setPosition(850, 600);
+
+        if (static_cast<string>(cur_word.getString()).length() % 2 == 0)
+        {
+            correct_mean.setPosition(850, 400);
+            wrong_mean.setPosition(850, 600);
+        }
+        else
+        {
+            wrong_mean.setPosition(850, 400);
+            correct_mean.setPosition(850, 600);
+        }
 
         window.draw(cur_word);
         window.draw(correct_mean);
