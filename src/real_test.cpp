@@ -75,8 +75,7 @@ void real_test(User &Primary)
             // Removing word to avoid duplication
             total_words.erase(total_words.begin() + place);
             // setting a random word for another opton(wrong meaning)
-            srand(time(NULL));
-            place = rand() % (total_words.size() - 1);
+            place = (place + total_words[place].get_meaning().length()) % total_words.size() - 1;
             tmp.set_wrong_meaning(total_words[place].get_word());
             // Adding it to list
             test_word_list.push_back(tmp);
@@ -98,8 +97,7 @@ void real_test(User &Primary)
             // Removing word to avoid duplication
             total_words.erase(total_words.begin() + place);
             // setting a random word for another opton(wrong meaning)
-            srand(time(NULL));
-            place = rand() % (total_words.size() - 1);
+            place = (place + total_words[place].get_meaning().length()) % total_words.size() - 1;
             tmp.set_wrong_meaning(total_words[place].get_word());
             // Adding it to list
             test_word_list.push_back(tmp);
