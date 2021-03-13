@@ -53,6 +53,7 @@ bool choose()
             if (event.type == sf::Event::EventType::Closed)
             {
                 window.close();
+                return -4;
             }
             // Mouse Click
             if (event.type == sf::Event::MouseButtonPressed)

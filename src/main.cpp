@@ -15,16 +15,16 @@ int main()
     // cout << Primary.get_password() << endl;
     if (login(Primary))
     {
-
-        // int T = choose();
-        // if (T == 0) // learn
-        // {
-        //     app(Primary);
-        // }
-        // else if (T == 1) // Exam
-        // {
+        int T = choose();
+        if (T == 0) // learn
+        {
+            app(Primary);
+        }
+        else if (T == 1) // Exam
+        {
             test_summery(Primary);
-        // }
+        }
+
     }
     return 0;
 }
