@@ -120,8 +120,9 @@ bool login(User &primary)
                     my_user = read_user(username);
                     if (my_user.get_username() == "404")
                     {
-                        my_user = User(username, password);
-                        write_user(my_user);
+                        my_user = User(username, sha256(password));
+                        primary = my_user;
+                        write_user(primary);
                         cout << "signed UP" << endl;
                     }
                     else

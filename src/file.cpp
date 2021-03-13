@@ -87,8 +87,8 @@ void write_user(User const &u)
     {
         string username;
         in >> username;
-        if(username == "")
-        break;
+        if (username == "")
+            break;
         tmp_user.username = username;
         in.ignore(); // ignore space
         getline(in, tmp_user.password, ',');
@@ -106,7 +106,19 @@ void write_user(User const &u)
     for (auto &it : vec)
         if (it.get_username() == u.get_username())
             it = u;
-
+    bool is_avail = false;
+    for (auto &it : vec)
+    {
+        if (it.get_username() == u.get_username())
+        {
+            is_avail = true;
+            break;
+        }
+    }
+    if (is_avail == false)
+    {
+        vec.push_back(u);
+    }
     // write at the end of the file
     std::ofstream out("../userslist.dat", std::ios::out);
     out.seekp(std::ios::beg);
