@@ -109,9 +109,9 @@ void real_test(User &Primary)
 
     while (window.isOpen())
     {
-        left.setString("left: " + std::to_string(words_left));
+        left.setString("left: " + std::to_string(words_left-1));
         // it is end of test
-        if (word_number == test_word_list.size())
+        if (word_number == test_word_list.size()-1)
         {
             try
             {
