@@ -101,7 +101,7 @@ bool login(User &primary)
                     }
                     else
                     {
-                        if (password == my_user.get_password())
+                        if (sha256(password) == my_user.get_password())
                         {
                             cout << "Login Successful!!" << endl;
                             primary = my_user;
@@ -200,7 +200,7 @@ bool login(User &primary)
         tmp_pass = password.substr(0, password.length() - 1); // Keeping Last input for usage in backsapce
 
         window.draw(background_sprite);
-        cur_box ? Passbox_sprite.setPosition(560, 490-1) : Passbox_sprite.setPosition(560, 330);
+        cur_box ? Passbox_sprite.setPosition(560, 490 - 1) : Passbox_sprite.setPosition(560, 330);
         window.draw(Passbox_sprite);
         // window.draw(rec1);
         // window.draw(rec2);
