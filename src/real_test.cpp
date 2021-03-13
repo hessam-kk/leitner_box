@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <deque>
+#include <unistd.h>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -51,12 +52,9 @@ void real_test(User &Primary)
     deque<Word> total_words;
     // Store all words in a single list to aplly random
     for (size_t i = 0; i < 7; i++)
-    {
         for (auto const &it : arr[i])
-        {
             total_words.push_back(it);
-        }
-    }
+
     // Initializing the Test_word_list for test
     deque<Word_in_test> test_word_list;
     if (total_words.size() > 10)
@@ -106,10 +104,14 @@ void real_test(User &Primary)
 
     int word_number = 0, correct_answers_count = 0, wrong_answers_count = 0;
     int pos = -1;
+    int words_left = test_word_list.size();
+    sf::Text left;
+
     while (window.isOpen())
     {
+        left.setString("left: " + std::to_string(words_left));
         // it is end of test
-        if (word_number == 9)
+        if (word_number == test_word_list.size())
         {
             try
             {
@@ -172,6 +174,7 @@ void real_test(User &Primary)
                         wrong_answers_count++;
                     }
                     word_number++;
+                    words_left--;
                     cout << word_number << endl;
                 }
                 // Choose buttom Word
@@ -188,6 +191,7 @@ void real_test(User &Primary)
                         wrong_answers_count++;
                     }
                     word_number++;
+                    words_left--;
                     cout << word_number << endl;
                 }
                 cout << "corrects: " << correct_answers_count << endl;
@@ -211,6 +215,11 @@ void real_test(User &Primary)
         wrong_mean.setFillColor(sf::Color::Black);
         wrong_mean.setCharacterSize(50);
 
+        left.setFont(font);
+        left.setFillColor(sf::Color::Black);
+        left.setCharacterSize(50);
+        left.setPosition(710, 800);
+
         if (static_cast<string>(cur_word.getString()).length() % 2 == 0)
         {
             correct_mean.setPosition(850, 400);
@@ -227,6 +236,7 @@ void real_test(User &Primary)
         window.draw(cur_word);
         window.draw(correct_mean);
         window.draw(wrong_mean);
+        window.draw(left);
         window.display();
     }
 }
