@@ -2,10 +2,12 @@
 #include "word.hpp"
 #include "user.hpp"
 #include "sha256.h"
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <unistd.h>
+#include <vector>
 
 using std::cerr;
 using std::cout;
@@ -71,39 +73,54 @@ void write_file(std::array<std::deque<Word>, 7> &arr, std::string const &Usernam
 
 void write_user(User const &u)
 {
-    std::ofstream out("../userslist.dat", std::ios::app);
+
+    std::vector<User> vec;
     std::ifstream in("../userslist.dat", std::ios::in);
-    if (!out)
+    if (!in)
     {
         cout << "error open out file" << endl;
     }
 
+    // store all users in the vector to process
+    User tmp_user;
     while (!in.eof())
     {
-        // in.ignore();
-        string username = "";
-        getline(in, username, ' ');
-        if (username == u.get_username())
-        {
-            out << u.get_username() << ' ' << u.get_password() + ',';
-            out << u.get_total_test() << ' ' << u.get_total_score() << ' ';
-            out << u.get_last_test().total_questions << ' ' << u.get_last_test().score << ' ';
-            out << u.get_last_test().corrects << ' ' << u.get_last_test().wrongs << '\n';
-            out.flush();
-            out.clear();
-            out.close();
-            cout << "End over write user ";
-            return;
-        }
+        string username;
+        in >> username;
+        if(username == "")
+        break;
+        tmp_user.username = username;
+        in.ignore(); // ignore space
+        getline(in, tmp_user.password, ',');
+        in >> tmp_user.total_tests               //
+            >> tmp_user.total_scores             //
+            >> tmp_user.last_one.total_questions //
+            >> tmp_user.last_one.score           //
+            >> tmp_user.last_one.corrects        //
+            >> tmp_user.last_one.wrongs;
+        in.ignore(1); // ignore -
+        vec.push_back(tmp_user);
     }
-    out.seekp(std::ios::end);
-    cout << "start write user " << endl;
-    SHA256 sha256;
-    out << u.get_username() << ' ' << sha256(u.get_password()) + ',';
-    out << u.get_total_test() << ' ' << u.get_total_score() << ' ';
-    out << u.get_last_test().total_questions << ' ' << u.get_last_test().score << ' ';
-    out << u.get_last_test().corrects << ' ' << u.get_last_test().wrongs << '\n';
 
+    // update states
+    for (auto &it : vec)
+        if (it.get_username() == u.get_username())
+            it = u;
+
+    // write at the end of the file
+    std::ofstream out("../userslist.dat", std::ios::out);
+    out.seekp(std::ios::beg);
+    cout << "start write user " << endl;
+
+    SHA256 sha256;
+    for (auto const &it : vec)
+    {
+        cout << "Writing user: " << it.get_username() << endl;
+        out << it.get_username() << ' ' << it.get_password() + ',';
+        out << it.get_total_test() << ' ' << it.get_total_score() << ' ';
+        out << it.get_last_test().total_questions << ' ' << it.get_last_test().score << ' ';
+        out << it.get_last_test().corrects << ' ' << it.get_last_test().wrongs << '\n';
+    }
     out.flush();
     out.clear();
     out.close();
@@ -135,7 +152,7 @@ User read_user(std::string main_username)
             in >> tmp_user.total_tests               //
                 >> tmp_user.total_scores             //
                 >> tmp_user.last_one.total_questions //
-                >> tmp_user.last_one.score       //
+                >> tmp_user.last_one.score           //
                 >> tmp_user.last_one.corrects        //
                 >> tmp_user.last_one.wrongs;
             in.ignore(2); // ignore -
