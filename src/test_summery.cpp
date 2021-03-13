@@ -50,6 +50,7 @@ void test_summery(User &Primary)
             // Close Window
             if (event.type == sf::Event::EventType::Closed)
             {
+                write_user(Primary);
                 window.close();
             }
             // Mouse Move
