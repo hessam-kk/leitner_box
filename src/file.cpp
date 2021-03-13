@@ -1,6 +1,7 @@
 #include "file.hpp"
 #include "word.hpp"
 #include "user.hpp"
+#include "sha256.h"
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -97,7 +98,8 @@ void write_user(User const &u)
     }
     out.seekp(std::ios::end);
     cout << "start write user " << endl;
-    out << u.get_username() << ' ' << u.get_password() + ',';
+    SHA256 sha256;
+    out << u.get_username() << ' ' << sha256(u.get_password()) + ',';
     out << u.get_total_test() << ' ' << u.get_total_score() << ' ';
     out << u.get_last_test().total_questions << ' ' << u.get_last_test().score << ' ';
     out << u.get_last_test().corrects << ' ' << u.get_last_test().wrongs << '\n';
