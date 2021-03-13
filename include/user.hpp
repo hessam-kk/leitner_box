@@ -10,6 +10,7 @@ struct last_test
 };
 class User
 {
+    friend void write_user(User const &);
     friend User read_user(std::string);
 
 public:
