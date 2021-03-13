@@ -171,10 +171,31 @@ bool login(User &primary)
                     cout << "got input! : " << (cur_box ? password : username) << " -> " << (cur_box ? password : username).length() << endl;
                 }
                 // Handling Enter
-                if (event.text.unicode == 13 && input.length() != 0 && input.find(':') != string::npos)
+                if (event.text.unicode == 13)
                 {
-                    cout << "enter!!" << endl;
-                }
+
+                    cout << "Enter User:" << username << " Pass:" << password << endl;
+                    my_user = read_user(username);
+                    cout << "HI  " << my_user.get_username() << endl;
+                    if (my_user.get_username() == "404")
+                    {
+                        cout << "no user available" << endl;
+                    }
+                    else
+                    {
+                        if (sha256(password) == my_user.get_password())
+                        {
+                            cout << "Login Successful!!" << endl;
+                            primary = my_user;
+                            return 1;
+                        }
+                        else
+                        {
+                            cout << "Wrong Password!!" << endl;
+                        }
+                    }
+                } // End Click On Enter
+
                 // Handling Backsapce
                 if (event.text.unicode == 8)
                 {
